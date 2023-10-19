@@ -1,6 +1,6 @@
 # TP3Cloud
 
-##Módulos
+#Módulos
 
 Los modulos utilizados son:
 - VPC (modulo custom):
@@ -11,7 +11,7 @@ Los modulos utilizados son:
 - API Gateway():
 - Eventbridge():
 
-##Los componenetes a evaluar son:
+#Los componenetes a evaluar son:
 1. VPC
 2. DynamoDB
 3. S3
