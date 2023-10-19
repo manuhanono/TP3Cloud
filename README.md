@@ -1,11 +1,14 @@
-# TP3Cloud
+# TP3Cloud - Grupo 5
+
+# Objetivo
+El objetivo del trabajo es centralizar el contenido de las diferentes plataformas de Streaming con el fin de que los usuarios puedan identificar rapidamente donde se encuentra el contenido que es de su interés.
 
 # Módulos
 
 Los modulos utilizados son:
 - VPC (modulo custom):
 - DynamoDB (modulo externo):
-- S3 (modulo externo):
+- S3 ():
 - Cloudfront ():
 - Lambda ():
 - API Gateway():
