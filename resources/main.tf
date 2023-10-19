@@ -37,7 +37,7 @@ module "website" {
   domain_name = var.website_name
 }
 
-# module "lambda" {
-#   source = "../modules/lambda"
-# }
+module "lambda" {
+  source = "../modules/lambda"
+}
 
