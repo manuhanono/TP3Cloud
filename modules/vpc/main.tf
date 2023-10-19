@@ -29,6 +29,7 @@ resource "aws_subnet" "private_subnets" {
 
   tags = {
     Name = "private-${count.index + 1}"
+    Tier = floor(count.index / local.zones_count) + 1
   }
 }
 
@@ -77,20 +78,29 @@ resource "aws_route_table_association" "public_associations" {
 #  route_table_id = aws_route_table.private.id 
 #  }
 
-# resource "aws_security_group" "default" {
-#   name        = "allow_tls"
-#   description = "Allow TLS inbound traffic"
-#   vpc_id      = aws_vpc.main.id
+resource "aws_security_group" "default" {
+  name        = "allow_tls"
+  description = "Allow TLS inbound traffic"
+  vpc_id      = aws_vpc.main.id
 
-#   ingress {
-#     description = "TLS from VPC"
-#     from_port   = 443
-#     to_port     = 443
-#     protocol    = "tcp"
-#     cidr_blocks = [aws_vpc.main.cidr_block]
-#   }
+  ingress {
+    description = "TLS from VPC"
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = [aws_vpc.main.cidr_block]
+  }
 
-#   tags = {
-#     Name = "allow_tls"
-#   }
-# }
+  tags = {
+    Name = "allow_tls"
+  }
+}
+
+resource "aws_vpc_endpoint" "this" {
+  for_each = var.vpc_endpoints
+
+  vpc_id       = aws_vpc.main.id
+  service_name = each.value.service_name
+
+  route_table_ids = [aws_vpc.main.default_route_table_id]
+}

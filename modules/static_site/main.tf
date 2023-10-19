@@ -66,7 +66,7 @@ module "www" {
 data "aws_iam_policy_document" "policy_static" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = [module.static_site.s3_bucket_arn, "${module.static_site.s3_bucket_arn}/*"]
+    resources = ["${module.static_site.s3_bucket_arn}/*"]
 
     principals {
       type        = "AWS"
@@ -78,7 +78,8 @@ data "aws_iam_policy_document" "policy_static" {
 data "aws_iam_policy_document" "policy_www" {
   statement {
     actions   = ["s3:GetObject"]
-    resources = [module.static_site.s3_bucket_arn, "${module.www.s3_bucket_arn}/*"]
+    resources = ["${module.www.s3_bucket_arn}/*"]
+ #   resources = [module.static_site.s3_bucket_arn, "${module.www.s3_bucket_arn}/*"]
 
     principals {
       type        = "AWS"
@@ -87,3 +88,6 @@ data "aws_iam_policy_document" "policy_www" {
   }
 }
 
+
+
+    

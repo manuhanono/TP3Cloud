@@ -23,6 +23,7 @@ variable "private_subnet_count" {
   type = number
 }
 
-# variable "s3_arn" {
-#   type = string
-# }
+variable "vpc_endpoints" {
+  type        = map(any)
+  description = "Data to create vpc endpoints"
+}
