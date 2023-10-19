@@ -1,53 +1,37 @@
-resource "aws_apigatewayv2_api" "lambda" {
-  name          = "serverless_lambda_gw"
-  protocol_type = "HTTP"
+resource "aws_api_gateway_rest_api" "example_api" {
+  name        = var.api_name
+  description = var.api_description
 }
 
-resource "aws_apigatewayv2_stage" "lambda" {
-  api_id = aws_apigatewayv2_api.lambda.id
-
-  name        = "serverless_lambda_stage"
-  auto_deploy = true
-
-  access_log_settings {
-    destination_arn = aws_cloudwatch_log_group.api_gw.arn
-
-    format = jsonencode({
-      requestId               = "$context.requestId"
-      sourceIp                = "$context.identity.sourceIp"
-      requestTime             = "$context.requestTime"
-      protocol                = "$context.protocol"
-      httpMethod              = "$context.httpMethod"
-      resourcePath            = "$context.resourcePath"
-      routeKey                = "$context.routeKey"
-      status                  = "$context.status"
-      responseLength          = "$context.responseLength"
-      integrationErrorMessage = "$context.integrationErrorMessage"
-      }
-    )
-  }
+resource "aws_api_gateway_resource" "example_resource" {
+  rest_api_id = aws_api_gateway_rest_api.example_api.id
+  parent_id   = aws_api_gateway_rest_api.example_api.root_resource_id
+  path_part  = var.resource_path
 }
 
-resource "aws_apigatewayv2_integration" "hello_world" {
-  api_id = aws_apigatewayv2_api.lambda.id
-
-  integration_uri    = aws_lambda_function.hello_world.invoke_arn
-  integration_type   = "AWS_PROXY"
-  integration_method = "POST"
+resource "aws_api_gateway_method" "example_method" {
+  rest_api_id   = aws_api_gateway_rest_api.example_api.id
+  resource_id   = aws_api_gateway_resource.example_resource.id
+  http_method   = "POST"
+  authorization = "NONE"
 }
 
-resource "aws_apigatewayv2_route" "hello_world" {
-  api_id = aws_apigatewayv2_api.lambda.id
-
-  route_key = "GET /hello"
-  target    = "integrations/${aws_apigatewayv2_integration.hello_world.id}"
+resource "aws_api_gateway_integration" "example_integration" {
+  rest_api_id = aws_api_gateway_rest_api.example_api.id
+  resource_id = aws_api_gateway_resource.example_resource.id
+  http_method = aws_api_gateway_method.example_method.http_method
+  type        = "AWS_PROXY"
+  integration_http_method = "POST"
+  uri         = var.lambda_integration_uri
 }
 
-resource "aws_lambda_permission" "api_gw" {
-  statement_id  = "AllowExecutionFromAPIGateway"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.hello_world.function_name
-  principal     = "apigateway.amazonaws.com"
+resource "aws_api_gateway_deployment" "example_deployment" {
+  depends_on = [aws_api_gateway_integration.example_integration]
+  rest_api_id = aws_api_gateway_rest_api.example_api.id
+  stage_name = var.api_stage_name
+}
 
-  source_arn = "${aws_apigatewayv2_api.lambda.execution_arn}/*/*"
+output "api_gateway_id" {
+  description = "ID of the created API Gateway"
+  value       = aws_api_gateway_rest_api.example_api.id
 }
