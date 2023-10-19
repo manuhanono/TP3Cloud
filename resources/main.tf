@@ -35,6 +35,11 @@ module "website" {
   domain_name = var.website_name
 }
 
+module "cloudfront" {
+  source      = "../modules/cloudfront"
+  s3_name = module.website.domain_name
+}
+
 module "lambda" {
   count  = length(var.lambda_functions)
   source = "terraform-aws-modules/lambda/aws"
