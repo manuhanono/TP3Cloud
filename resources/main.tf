@@ -36,3 +36,8 @@ module "website" {
   source = "../modules/static_site"
   domain_name = var.website_name
 }
+
+# module "lambda" {
+#   source = "../modules/lambda"
+# }
+
