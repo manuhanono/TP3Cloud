@@ -36,7 +36,7 @@ Los meta argumentos utilizados son:
 
 # Diagrama de arquitecura
 Se arma un diagrama de arquitectura con los componentes deployados
-
+(insertar diagrama)
 
 
 
