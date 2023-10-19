@@ -9,16 +9,16 @@ module "vpc" {
 }
 
 module "dynamodb" {
-  for_each = local.dynamodb.tables
+  for_each = var.tables
   source   = "terraform-aws-modules/dynamodb-table/aws"
 
-  name      = each.value.name
+  name      = each.value
   hash_key  = "pk"
   range_key = "sk"
 
   billing_mode   = "PROVISIONED"
-  read_capacity  = local.dynamodb.read_capacity
-  write_capacity = local.dynamodb.write_capacity
+  read_capacity  = var.read_capacity
+  write_capacity = var.write_capacity
 
   attributes = [
     {
@@ -32,16 +32,7 @@ module "dynamodb" {
   ]
 }
 
-module "s3_bucket" {
-  source = "terraform-aws-modules/s3-bucket/aws"
-
-  bucket = "my-s3-bucket"
-  acl    = "private"
-
-  control_object_ownership = true
-  object_ownership         = "ObjectWriter"
-
-  versioning = {
-    enabled = true
-  }
+module "website" {
+  source = "../modules/static_site"
+  domain_name = var.website_name
 }
