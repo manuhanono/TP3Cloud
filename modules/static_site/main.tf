@@ -19,18 +19,18 @@ module "logs" {
 
 module "static_site" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  bucket_prefix = "please-domain-g05-tp3-funciona"
+  bucket_prefix = "${var.domain_name}-domain"
   attach_policy = true
   policy        = data.aws_iam_policy_document.policy_static.json
 
   acl                      = "private"
   control_object_ownership = true
   object_ownership         = "ObjectWriter"
-  block_public_acls        = true
-  block_public_policy      = true
-  ignore_public_acls       = true
-  restrict_public_buckets  = true
-
+  block_public_acls        = false
+  block_public_policy      = false
+  ignore_public_acls       = false
+  restrict_public_buckets  = false
+  
   logging = {
     target_bucket = module.logs.s3_bucket_id
     target_prefix = "log/"
@@ -38,6 +38,20 @@ module "static_site" {
   website = {
     index_document = "index.html"
     error_document = "error.html"
+  }
+}
+
+data "aws_iam_policy_document" "policy_static" {
+  statement {
+    actions   = ["s3:GetObject"]
+   resources = ["arn:aws:s3:::manu-lamroth-futbol-central-domain20231020205913871100000001/*"]
+   # resources = "${module.static_site.s3_bucket_arn}/*"
+    effect = "Allow"
+
+    principals {
+      type        = "AWS"
+      identifiers = ["*"]
+    }
   }
 }
 
@@ -51,8 +65,8 @@ module "www" {
   control_object_ownership = true
   object_ownership         = "ObjectWriter"
   block_public_acls        = false
-  block_public_policy      = true
-  ignore_public_acls       = true
+  block_public_policy      = false
+  ignore_public_acls       = false
   restrict_public_buckets  = false
 
   website = {
@@ -63,27 +77,15 @@ module "www" {
 }
 
 
-data "aws_iam_policy_document" "policy_static" {
-  statement {
-    actions   = ["s3:GetObject"]
-#    resources = ["${module.static_site.s3_bucket_arn}/*"]
-    resources = [module.static_site.s3_bucket_arn]
 
-    principals {
-      type        = "AWS"
-      identifiers = var.bucket_access
-    }
-  }
-}
+   
 
 data "aws_iam_policy_document" "policy_www" {
   statement {
     actions   = ["s3:GetObject"]
-#    resources = ["${module.www.s3_bucket_arn}/*"]
-    resources = [module.www.s3_bucket_arn]
-
-    
- #   resources = [module.static_site.s3_bucket_arn, "${module.www.s3_bucket_arn}/*"]
+#    resources = ["arn:aws:s3:::manu-lamroth-futbol-itba-www20231019175620847000000002/*"]
+    resources = ["arn:aws:s3:::manu-lamroth-futbol-central-www20231020194033432100000001/*"]
+    effect = "Allow"
 
     principals {
       type        = "AWS"
@@ -91,8 +93,24 @@ data "aws_iam_policy_document" "policy_www" {
     }
   }
 }
+   
 
 
 
+# statement {
+#     sid       = "AllowCloudFrontServicePrincipal"
+#     effect    = "Allow"
+#     actions   = ["s3:GetObject"]
+#     resources = ["arn:aws:s3:::${aws_s3_bucket.main["www"].id}/*"]
 
-    
+#     principals {
+#       type        = "Service"
+#       identifiers = ["cloudfront.amazonaws.com"]
+#     }
+
+#     condition {
+#       test     = "StringEquals"
+#       variable = "AWS:SourceArn"
+#       values   = [aws_cloudfront_distribution.cdn[0].arn]
+#     }
+#   }

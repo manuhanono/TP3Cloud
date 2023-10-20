@@ -14,10 +14,10 @@ variable "vpc_endpoints" {
   type        = map(any)
   description = "Data to create vpc endpoints"
   default = {
-      dynamodb = {
-        service_name  = "com.amazonaws.us-east-1.dynamodb"
-        endpoint_name = "dynamodb-vpc-endpoint"
-      }
+    dynamodb = {
+      service_name  = "com.amazonaws.us-east-1.dynamodb"
+      endpoint_name = "dynamodb-vpc-endpoint"
+    }
   }
 }
 variable "read_capacity" {
@@ -45,7 +45,7 @@ variable "tables" {
 variable "website_name" {
   type        = string
   description = "Website domain name for the buckets"
-  default     = "manu-lamroth-futbol-itba"
+  default     = "manu-lamroth-futbol-central"
 }
 
 variable "website_bucket_name" {
@@ -63,11 +63,17 @@ variable "lambda_functions" {
     runtime     = string
     source_path = string
   }))
-  default = [ {
-  name          = "prueba-lambda-numero-1000"
-  description            = "Lambda de prueba"
-  handler                = "index.lambda_handler"
-  runtime                = "python3.8"
-  source_path            = "index.py"
-  } ]
+  default = [{
+    name        = "prueba-lambda-numero-1000"
+    description = "Lambda de prueba"
+    handler     = "index.lambda_handler"
+    runtime     = "python3.8"
+    source_path = "python/index.py"
+  }]
 }
+
+# variable "objects" {
+#   type        = list(any)
+#   description = "Objects to insert into bucket"
+#   default     = []
+# }

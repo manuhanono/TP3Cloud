@@ -5,5 +5,4 @@ variable "domain_name" {
 variable "bucket_access" {
   description = "Authorized bucket accessors"
   type        = list(string)
-  default = [ "*" ]
 }

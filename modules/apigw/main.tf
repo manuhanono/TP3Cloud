@@ -25,13 +25,17 @@ resource "aws_api_gateway_integration" "example_integration" {
   uri         = var.lambda_integration_uri
 }
 
-resource "aws_api_gateway_deployment" "example_deployment" {
+resource "aws_api_gateway_deployment" "this" {
   depends_on = [aws_api_gateway_integration.example_integration]
   rest_api_id = aws_api_gateway_rest_api.example_api.id
   stage_name = var.api_stage_name
-}
 
-output "api_gateway_id" {
-  description = "ID of the created API Gateway"
-  value       = aws_api_gateway_rest_api.example_api.id
+    lifecycle {
+    create_before_destroy = true
+  }
+}
+resource "aws_api_gateway_stage" "this" {
+  deployment_id = aws_api_gateway_deployment.this.id
+  rest_api_id   = aws_api_gateway_rest_api.example_api.id
+  stage_name    = var.api_stage_name
 }
