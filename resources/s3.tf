@@ -6,7 +6,7 @@ module "website" {
 
 resource "aws_s3_object" "data" {
 
-  count = length(local.objects)
+  count        = length(local.objects)
   bucket       = module.website.bucket_id
   key          = local.objects[count.index].key
   source       = local.objects[count.index].source

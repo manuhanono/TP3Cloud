@@ -1,6 +1,6 @@
 module "logs" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  bucket_prefix = "${var.domain_name}-logs"
+  bucket = "${var.domain_name}-logs"
   acl           = "log-delivery-write"
 
   force_destroy = true
@@ -19,7 +19,7 @@ module "logs" {
 
 module "static_site" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  bucket_prefix = "${var.domain_name}-domain"
+  bucket = "${var.domain_name}"
   attach_policy = true
   policy        = data.aws_iam_policy_document.policy_static.json
 
@@ -44,7 +44,10 @@ module "static_site" {
 data "aws_iam_policy_document" "policy_static" {
   statement {
     actions   = ["s3:GetObject"]
-   resources = ["arn:aws:s3:::manu-lamroth-futbol-central-domain20231020205913871100000001/*"]
+    resources = ["arn:aws:s3:::${var.domain_name}/*"]
+    #[module.static_site.s3_bucket_arn, "${module.static_site.s3_bucket_arn}/*"]
+
+  # resources = ["arn:aws:s3:::manu-lamroth-futbol-central20231021153507406500000001/*"]
    # resources = "${module.static_site.s3_bucket_arn}/*"
     effect = "Allow"
 
@@ -57,7 +60,7 @@ data "aws_iam_policy_document" "policy_static" {
 
 module "www" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  bucket_prefix = "${var.domain_name}-www"
+  bucket = "www.${var.domain_name}"
   attach_policy = true
   policy        = data.aws_iam_policy_document.policy_www.json
 
@@ -71,7 +74,7 @@ module "www" {
 
   website = {
     redirect_all_requests_to = {
-      host_name = module.static_site.s3_bucket_website_domain
+      host_name = module.static_site.s3_bucket_bucket_regional_domain_name
     }
   }
 }
@@ -83,8 +86,9 @@ module "www" {
 data "aws_iam_policy_document" "policy_www" {
   statement {
     actions   = ["s3:GetObject"]
-#    resources = ["arn:aws:s3:::manu-lamroth-futbol-itba-www20231019175620847000000002/*"]
-    resources = ["arn:aws:s3:::manu-lamroth-futbol-central-www20231020194033432100000001/*"]
+    resources = ["arn:aws:s3:::www.${var.domain_name}/*"]
+    #[module.www.s3_bucket_arn, "${module.www.s3_bucket_arn}/*"]
+   # resources = ["arn:aws:s3:::www.manu-lamroth-futbol-central20231021152905987600000001/*"]
     effect = "Allow"
 
     principals {
