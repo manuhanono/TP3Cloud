@@ -50,7 +50,7 @@ data "aws_iam_policy_document" "policy_static" {
 
     principals {
       type        = "AWS"
-      identifiers = ["*"]
+      identifiers = var.bucket_access
     }
   }
 }
@@ -71,7 +71,7 @@ module "www" {
 
   website = {
     redirect_all_requests_to = {
-      host_name = module.static_site.s3_bucket_bucket_regional_domain_name
+      host_name = module.static_site.s3_bucket_website_domain
     }
   }
 }
