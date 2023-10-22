@@ -11,33 +11,22 @@ variable "vpc_cidr" {
 variable "vpc_endpoints" {
   type        = map(any)
   description = "Data to create vpc endpoints"
-  default = {
-    dynamodb = {
-      service_name  = "com.amazonaws.us-east-1.dynamodb"
-      endpoint_name = "dynamodb-vpc-endpoint"
-    }
-  }
+
 }
 variable "read_capacity" {
   type        = number
   description = "Read Capacity for DynamoDB"
-  default     = 5
 }
 
 variable "write_capacity" {
   type        = number
   description = "Write Capacity for DynamoDB"
-  default     = 5
 
 }
 
 variable "tables" {
   type        = map(string)
   description = "Table names for DynamoDB"
-  default = {
-    forum = "forum",
-    users = "users"
-  }
 }
 
 variable "website_name" {
@@ -54,13 +43,6 @@ variable "lambda_functions" {
     runtime     = string
     source_path = string
   }))
-  default = [{
-    name        = "prueba-lambda-numero-1000"
-    description = "Lambda de prueba"
-    handler     = "index.lambda_handler"
-    runtime     = "python3.8"
-    source_path = "python/index.py"
-  }]
 }
 
 variable "availability_zones" {

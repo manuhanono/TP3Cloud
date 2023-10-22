@@ -24,6 +24,7 @@
 
 # Ignored vscode files
 .vscode/
+builds/
 
 # Ignore Any Generated JSON Files
 operations/automation-script/apply.json
