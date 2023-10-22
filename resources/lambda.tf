@@ -12,3 +12,4 @@ module "lambda" {
   vpc_subnet_ids         = module.vpc.private_subnets_id["1"]
   vpc_security_group_ids = [module.vpc.default_security_group_id]
 }
+

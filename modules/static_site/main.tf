@@ -69,8 +69,7 @@ module "www" {
 
   website = {
     redirect_all_requests_to = {
-      host_name = var.cloudfront_domain_name
-      #module.static_site.s3_bucket_bucket_regional_domain_name
+      host_name = module.static_site.s3_bucket_bucket_regional_domain_name
     }
   }
 }
