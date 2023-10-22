@@ -38,8 +38,7 @@ Los meta argumentos utilizados son:
 
 # Diagrama de arquitecura
 Se arma un diagrama de arquitectura con los componentes deployados
-(insertar diagrama)
-![image](arquitectura_modificada.png) (guardar imagen en esta branch y con ese codigo se pega)
+![image](Diagrama.png) 
 
 
 
