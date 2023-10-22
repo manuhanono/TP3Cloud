@@ -53,7 +53,7 @@ resource "aws_route_table" "public" {
   }
 }
 
-/* resource "aws_route_table" "private" {
+ resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -64,7 +64,7 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "private_route_table"
   }
-} */
+} 
 
 resource "aws_route_table_association" "public_associations" {
   count          = var.public_subnet_count * local.zones_count
@@ -72,11 +72,11 @@ resource "aws_route_table_association" "public_associations" {
   route_table_id = aws_route_table.public.id
 }
 
-# resource "aws_route_table_association" "private_associations" {
-#  count          = var.private_subnet_count * local.zones_count
-#  subnet_id      = aws_subnet.private_subnets[count.index].id
-#  route_table_id = aws_route_table.private.id 
-#  }
+resource "aws_route_table_association" "private_associations" {
+ count          = var.private_subnet_count * local.zones_count
+ subnet_id      = aws_subnet.private_subnets[count.index].id
+ route_table_id = aws_route_table.private.id 
+ }
 
 resource "aws_security_group" "default" {
   name        = "allow_tls"

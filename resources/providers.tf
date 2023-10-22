@@ -1,9 +1,9 @@
 
 provider "aws" {
   region = "us-east-1"
-  #     default_tags {
-  #     Name = ""
-  #     Author = "Terraform"
-
-  #   }  
+  # default_tags {
+  #   author = "Terraform"
+  #   Grupo  = "G05"
+  #   TP     = "TP3"
+  # }
 }

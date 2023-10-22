@@ -9,19 +9,4 @@ variable "bucket_name" {
 }
 
 
-variable "apigw_invoke_url" {
-  type        = string
-  description = "Url for Cloudfront to call the API-GW"
-}
-
-variable "apigw_base_path" {
-  type        = string
-  description = "Base path of the API-GW"
-}
-
-variable "apigw_stage" {
-  type        = string
-  description = "Stage prefix of the API-GW"
-}
-
 

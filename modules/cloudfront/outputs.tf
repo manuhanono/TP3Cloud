@@ -4,6 +4,6 @@ output "cloudfront_domain_name" {
 }
 
 output "OAI" {
-  description = "OAI form cloudfront"
+  description = "OAI from cloudfront"
   value       = aws_cloudfront_origin_access_identity.this.iam_arn
 }

@@ -8,9 +8,7 @@ module "lambda" {
   runtime                = var.lambda_functions[count.index].runtime
   source_path            = var.lambda_functions[count.index].source_path
   create_role            = false
-  lambda_role            = "arn:aws:iam::824206024463:role/LabRole"
+  lambda_role            = var.role
   vpc_subnet_ids         = module.vpc.private_subnets_id["1"]
   vpc_security_group_ids = [module.vpc.default_security_group_id]
-  #  attach_network_policy  = var.attach_network_policy
-
 }

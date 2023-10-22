@@ -1,7 +1,8 @@
 module "website" {
   source        = "../modules/static_site"
   domain_name   = var.website_name
-  bucket_access = [module.cloudfront.OAI]
+  bucket_access = [module.cloudfront.OAI, "arn:aws:iam::824206024463:root"]
+  cloudfront_domain_name = module.cloudfront.cloudfront_domain_name
 }
 
 resource "aws_s3_object" "data" {

@@ -16,7 +16,6 @@ module "logs" {
   }
 }
 
-
 module "static_site" {
   source        = "terraform-aws-modules/s3-bucket/aws"
   bucket = "${var.domain_name}"
@@ -45,10 +44,6 @@ data "aws_iam_policy_document" "policy_static" {
   statement {
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::${var.domain_name}/*"]
-    #[module.static_site.s3_bucket_arn, "${module.static_site.s3_bucket_arn}/*"]
-
-  # resources = ["arn:aws:s3:::manu-lamroth-futbol-central20231021153507406500000001/*"]
-   # resources = "${module.static_site.s3_bucket_arn}/*"
     effect = "Allow"
 
     principals {
@@ -74,21 +69,16 @@ module "www" {
 
   website = {
     redirect_all_requests_to = {
-      host_name = module.static_site.s3_bucket_bucket_regional_domain_name
+      host_name = var.cloudfront_domain_name
+      #module.static_site.s3_bucket_bucket_regional_domain_name
     }
   }
 }
-
-
-
-   
 
 data "aws_iam_policy_document" "policy_www" {
   statement {
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::www.${var.domain_name}/*"]
-    #[module.www.s3_bucket_arn, "${module.www.s3_bucket_arn}/*"]
-   # resources = ["arn:aws:s3:::www.manu-lamroth-futbol-central20231021152905987600000001/*"]
     effect = "Allow"
 
     principals {
@@ -97,24 +87,3 @@ data "aws_iam_policy_document" "policy_www" {
     }
   }
 }
-   
-
-
-
-# statement {
-#     sid       = "AllowCloudFrontServicePrincipal"
-#     effect    = "Allow"
-#     actions   = ["s3:GetObject"]
-#     resources = ["arn:aws:s3:::${aws_s3_bucket.main["www"].id}/*"]
-
-#     principals {
-#       type        = "Service"
-#       identifiers = ["cloudfront.amazonaws.com"]
-#     }
-
-#     condition {
-#       test     = "StringEquals"
-#       variable = "AWS:SourceArn"
-#       values   = [aws_cloudfront_distribution.cdn[0].arn]
-#     }
-#   }
