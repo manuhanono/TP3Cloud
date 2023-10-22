@@ -1,4 +1,4 @@
 locals {
-  zones_count        = length(var.availability_zones)
+  zones_count = length(var.availability_zones)
 }
 

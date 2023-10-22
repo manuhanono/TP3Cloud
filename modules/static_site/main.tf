@@ -1,7 +1,7 @@
 module "logs" {
-  source        = "terraform-aws-modules/s3-bucket/aws"
+  source = "terraform-aws-modules/s3-bucket/aws"
   bucket = "${var.domain_name}-logs"
-  acl           = "log-delivery-write"
+  acl    = "log-delivery-write"
 
   force_destroy = true
 
@@ -11,14 +11,14 @@ module "logs" {
   control_object_ownership = true
   object_ownership         = "ObjectWriter"
 
-    versioning = {
+  versioning = {
     enabled = true
   }
 }
 
 module "static_site" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  bucket = "${var.domain_name}"
+  bucket        = var.domain_name
   attach_policy = true
   policy        = data.aws_iam_policy_document.policy_static.json
 
@@ -29,7 +29,7 @@ module "static_site" {
   block_public_policy      = false
   ignore_public_acls       = false
   restrict_public_buckets  = false
-  
+
   logging = {
     target_bucket = module.logs.s3_bucket_id
     target_prefix = "log/"
@@ -44,7 +44,7 @@ data "aws_iam_policy_document" "policy_static" {
   statement {
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::${var.domain_name}/*"]
-    effect = "Allow"
+    effect    = "Allow"
 
     principals {
       type        = "AWS"
@@ -55,7 +55,7 @@ data "aws_iam_policy_document" "policy_static" {
 
 module "www" {
   source        = "terraform-aws-modules/s3-bucket/aws"
-  bucket = "www.${var.domain_name}"
+  bucket        = "www.${var.domain_name}"
   attach_policy = true
   policy        = data.aws_iam_policy_document.policy_www.json
 
@@ -78,7 +78,7 @@ data "aws_iam_policy_document" "policy_www" {
   statement {
     actions   = ["s3:GetObject"]
     resources = ["arn:aws:s3:::www.${var.domain_name}/*"]
-    effect = "Allow"
+    effect    = "Allow"
 
     principals {
       type        = "AWS"

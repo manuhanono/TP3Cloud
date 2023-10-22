@@ -12,8 +12,8 @@ resource "aws_subnet" "public_subnets" {
   count  = var.public_subnet_count * local.zones_count
   vpc_id = aws_vpc.main.id
 
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, count.index + 1)
-  availability_zone       = var.availability_zones[count.index % local.zones_count]
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, count.index + 1)
+  availability_zone = var.availability_zones[count.index % local.zones_count]
 
   tags = {
     Name = "public-${count.index + 1}"
@@ -24,8 +24,8 @@ resource "aws_subnet" "private_subnets" {
   count  = var.private_subnet_count * local.zones_count
   vpc_id = aws_vpc.main.id
 
-  cidr_block              = cidrsubnet(var.vpc_cidr, 8, var.public_subnet_count * local.zones_count + count.index + 1)
-  availability_zone       = var.availability_zones[(var.public_subnet_count * local.zones_count + count.index) % local.zones_count]
+  cidr_block        = cidrsubnet(var.vpc_cidr, 8, var.public_subnet_count * local.zones_count + count.index + 1)
+  availability_zone = var.availability_zones[(var.public_subnet_count * local.zones_count + count.index) % local.zones_count]
 
   tags = {
     Name = "private-${count.index + 1}"
@@ -53,7 +53,7 @@ resource "aws_route_table" "public" {
   }
 }
 
- resource "aws_route_table" "private" {
+resource "aws_route_table" "private" {
   vpc_id = aws_vpc.main.id
 
   route {
@@ -64,7 +64,7 @@ resource "aws_route_table" "public" {
   tags = {
     Name = "private_route_table"
   }
-} 
+}
 
 resource "aws_route_table_association" "public_associations" {
   count          = var.public_subnet_count * local.zones_count
@@ -73,10 +73,10 @@ resource "aws_route_table_association" "public_associations" {
 }
 
 resource "aws_route_table_association" "private_associations" {
- count          = var.private_subnet_count * local.zones_count
- subnet_id      = aws_subnet.private_subnets[count.index].id
- route_table_id = aws_route_table.private.id 
- }
+  count          = var.private_subnet_count * local.zones_count
+  subnet_id      = aws_subnet.private_subnets[count.index].id
+  route_table_id = aws_route_table.private.id
+}
 
 resource "aws_security_group" "default" {
   name        = "allow_tls"

@@ -9,7 +9,7 @@ variable "vpc_name" {
 }
 
 variable "availability_zones" {
-  type    = list(string)
+  type = list(string)
 }
 
 variable "public_subnet_count" {

@@ -10,22 +10,22 @@ api_description      = "APIGW para la función Lambda, TP3 del G05"
 resource_path        = "myresource"
 api_stage_name       = "dev3"
 vpc_endpoints = {
-    dynamodb = {
-      service_name  = "com.amazonaws.us-east-1.dynamodb"
-      endpoint_name = "dynamodb-vpc-endpoint"
-    }
+  dynamodb = {
+    service_name  = "com.amazonaws.us-east-1.dynamodb"
+    endpoint_name = "dynamodb-vpc-endpoint"
   }
-read_capacity = 5
+}
+read_capacity  = 5
 write_capacity = 5
 tables = {
-    forum = "forum",
-    users = "users"
+  forum = "forum",
+  users = "users"
 }
-lambda_functions = [ {
-    name        = "prueba-lambda-numero-1000"
-    description = "Lambda de prueba"
-    handler     = "index.lambda_handler"
-    runtime     = "python3.8"
-    source_path = "python/index.py"
-  }]
+lambda_functions = [{
+  name        = "prueba-lambda-numero-1000"
+  description = "Lambda de prueba"
+  handler     = "index.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/index.py"
+}]
 
