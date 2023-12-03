@@ -1,0 +1,3 @@
+variable "cdn" {
+  type = string 
+}

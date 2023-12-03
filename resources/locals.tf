@@ -6,3 +6,4 @@ locals {
     content_type = "text/html"
   }]
 }
+
