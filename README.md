@@ -21,6 +21,7 @@ Los componenetes a evaluar son:
 4. Cloudfront
 5. Lambda
 6. API Gateway
+7. .....
 
 # Funciones utilizadas
 Las funciones utilizadas son:
