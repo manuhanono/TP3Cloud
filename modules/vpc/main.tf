@@ -58,7 +58,7 @@ resource "aws_route_table" "private" {
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.main.id
+    gateway_id = aws_nat_gateway.nat_gateway["0"].id
   }
 
   tags = {
@@ -103,4 +103,41 @@ resource "aws_vpc_endpoint" "this" {
   service_name = each.value.service_name
 
   route_table_ids = [aws_vpc.main.default_route_table_id]
+}
+
+resource "aws_nat_gateway" "nat_gateway" {
+  count               = 1
+  allocation_id       = aws_eip.nat_eip[count.index].id
+  subnet_id           = aws_subnet.public_subnets["0"].id
+  tags = {
+    Name = "nat_gateway"
+  }
+}
+
+resource "aws_eip" "nat_eip" {
+  count = 1
+}
+
+resource "aws_security_group" "lambda_sg" {
+  name        = "lambda_sg"
+  description = "Security group for Lambda"
+  vpc_id      = aws_vpc.main.id
+
+  egress {
+    from_port   = 0
+    to_port     = 0
+    protocol    = "-1"
+    cidr_blocks = ["0.0.0.0/0"]  # Permitir todo el tráfico saliente
+  }
+
+  ingress {
+    from_port   = 443  # o el puerto que necesites para la API
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"]  # Permitir todo el tráfico entrante
+  }
+
+  tags = {
+    Name = "lambda_sg"
+  }
 }

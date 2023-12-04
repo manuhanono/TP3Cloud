@@ -11,6 +11,11 @@ output "default_security_group_id" {
   value       = aws_security_group.default.id
 }
 
+output "lambda_security_group_id" {
+  description = "ID of the LAMBDA security group"
+  value       = aws_security_group.lambda_sg.id
+}
+
 
 output "private_subnets_id" {
   description = "Map of subnet ids"

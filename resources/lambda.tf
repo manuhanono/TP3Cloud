@@ -10,6 +10,6 @@ module "lambda" {
   create_role            = false
   lambda_role            = var.role
   vpc_subnet_ids         = module.vpc.private_subnets_id["1"]
-  vpc_security_group_ids = [module.vpc.default_security_group_id]
+  vpc_security_group_ids = [module.vpc.lambda_security_group_id]
 }
 
