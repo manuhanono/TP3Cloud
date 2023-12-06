@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Indicamos que se pueda usar caracteres especiales como tildes o la ñ-->
+    <meta charset="UTF-8">
+
+    <!--Utilizamos estas etiquetas a continuación para lograr una página responsive-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Linkeamos con la hoja de CSS para poder darle el estilo que deseamos-->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!--Usamos la etiqueta title para ponerle un nombre en la solapa arriba de todo -->
+    <title> Resultados de búsqueda </title>
+</head>
+
+<body>
+
+    <!-- Comienzo encabezado -->
+
+    <header id="header">
+
+        <div class="div-logo-header">
+        </div>
+
+        <div class="div-lista-header">
+            <ul>
+                <li><a href="index.html"> HOME </a></li>
+
+                <li><a href="genres.html"> GÉNEROS </a></li>
+            </ul>
+        </div>
+
+        <div class="formulario-header">
+            <form action="./Resultados-de-búsqueda.html" method="GET">
+                <input class="buscador-form" type="radio" name="media" value="all" checked>
+                <label for="">Todo</label>
+
+
+                <input id="Buscador" class="search" type="text" name="buscador" placeholder="Buscar">
+                <button type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
+                <p class="message"></p>
+            </form>
+        </div>
+
+    </header>
+
+    <!-- Fin encabezado -->
+
+    <main class="main-resultados">
+        <h1>Resultados de búsqueda: Harry Potter</h1>
+        <h2 class="vacio"> </h2>
+        <section class="padre-de-peli-resultados">
+
+            <!-- Comienzo primera pelicula de Harry Potter -->
+
+            <!--  <article class="articulo-peli-resultados">
+              <a href="detailmovie.html"> 
+                    <img class="imgpeli-resultados" src="./img/harryPotterPiedraFilosofal.jpg" alt="Imagen de Harry Potter 1">
+                </a>
+
+                <div class="padre-info-resultados">
+                    <a href="detailmovie.html">
+                        <h2 class="Titulo-de-peli-resultados">Harry Potter y la piedra filosofal</h2>
+                    </a>
+
+                    <h3 class="Fecha-estreno-resultados">16 de noviembre de 2001</h3>
+
+                    <p class="sinopsis-resultados">Harry Potter es un huérfano que vive con sus desagradables tíos, los
+                        Dursley, y su
+                        repelente primo
+                        Dudley. Se acerca su undécimo cumpleaños y tiene pocas esperanzas de recibir algún regalo, ya
+                        que
+                        nunca nadie se acuerda de él. Sin embargo, pocos días antes de su cumpleaños, una serie de
+                        misteriosas cartas dirigidas a él y escritas con una estridente tinta verde rompen la monotonía
+                        de
+                        su vida: Harry es un mago y sus padres también lo eran.</p>
+                </div> 
+
+            </article>-->
+
+
+
+
+            <!--  <h1 class="sin-resultados">No hay resultados</h1> -->
+
+        </section>
+        <section class="padre-de-series-resultados">
+
+        </section>
+    </main>
+
+
+
+    <!--------------------------------------Comienzo footer -------------------------------------->
+    <footer>
+
+        <div class="div-logo-footer">
+            <img class="tmdb" src="./img/tmdb.png" alt="TMDB logo">
+        </div>
+
+    </footer>
+    <!--------------------------------------Fin del Footer-------------------------------------->
+</body>
+<!--------------------------------------Fin del body-------------------------------------->
+<script src="./js/header.js"></script>
+<script src="./js/resultadobusquedapeli.js"></script>
+<script src="./js/resultadosdebusquedaseries.js"></script>
+
+</html>

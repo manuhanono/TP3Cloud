@@ -1,0 +1,1170 @@
+/*Usamos el selector universal (* {}) para que lo que este entre corchetes aplique a todo el código, y la propiedad box-sizing para que el modelo de caja sea más fácil de usar porque descuenta  del ancho y alto lo que agregamos en relleno y borde*/
+* {
+    box-sizing: border-box;
+    margin: 0px;
+    padding: 0px;
+}
+
+/********************************************************************************************************
+*                                               CSS ENCABEZADO
+**********************************************************************************************************/
+
+/*Empieza CSS de encabezado */
+
+#header {
+    height: 200px;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    background-color: white;
+}
+
+div.div-logo-header {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+}
+
+.logo { 
+    border-radius: 50%;
+    width: 70%;
+}
+
+div.div-lista-header {
+    width: 50%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+
+div.div-lista-header ul {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+}
+
+div.div-lista-header ul li {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0px 20px;
+    font-style: italic;
+    list-style-type: none;
+}
+
+div.div-lista-header a {
+    font-size: 30px;
+    text-align: center;
+}
+
+/*La pseudo-clase :hover hace que cuando el usuario se pare con el mouse sobre lo que le indicamos el :hover (en este caso, una etiqueta a dentro de un div), este va a cambiar de color al color que le asignemos dentro de los corchetes */
+div.div-lista-header a:hover {
+    color: #f7c4a2;
+}
+
+.formulario-header {
+    width: 25%;
+    display: flex;
+    justify-content: center;
+}
+
+header form {
+    display: flex;
+    font-size: 15px;
+    align-items: center;
+    width: 100%;
+}
+
+header form img {
+    height: 20px;
+}
+
+ .buscador-form {
+    width: 15%;
+}
+
+header form input {
+    width:100%;
+    margin: 0px 5px;
+    background-color: #f7c4a2;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+header form input:hover {
+    background-color: #96582e6c;
+}
+
+header form input::placeholder {
+    padding: 10px;
+    color: white;
+}
+
+.message {
+    margin: 0px 10px;
+    text-align: center;
+}
+
+/* Termina CSS de encabezado */
+
+/* tipografia para todos los HTML*/
+body {
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+}
+
+a {
+    font-weight: bold;
+    text-decoration: none;
+    color:black
+}
+
+/********************************************************************************************************
+*                                               CSS INDEX
+**********************************************************************************************************/
+
+/*Empieza CSS de Peliculas populares*/
+
+.main-home h1 {
+    color: black;
+    border: solid black;
+    background-color: #f7c4a2;
+    text-align: center;
+    font-size: 50px;
+}
+.main-home {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Comienzo CSS peliculas populares */
+
+.section1-home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        background-color: #f7c4a2;
+        border: solid 10px black;
+    }
+       
+.padre-peliculas-populares-home {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color:  #f7c4a2;
+    }
+
+.peli-home {
+        display: flex;
+        width: 16%;
+        height: 300px ;
+        align-items: center;
+        justify-content: space-between;
+        padding: 10px;
+        flex-direction: column;
+        background-color: #96582e6c;
+    }
+   
+
+.imgpeli-home {
+    height: 175px;
+}
+
+.subtitulo-home {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+}
+
+/* ESTO AFECTA A TODAS LAS FECHAS DE ESTRENO y H3 DE TODAS LAS SECCIONES*/
+
+.h3-home {
+    font-size: 15px;
+    text-align: center;
+}
+
+.Fecha-estreno-home {
+    font-size: 13px;
+    text-align: center;
+}
+
+/* Termina CSS de peliculas populares*/
+
+/*Empieza CSS de series populares*/
+    
+.section2-home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        background-color: #f7c4a2;
+        border: solid 10px black;
+       
+    }
+
+.subtitulo2-home {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+    }
+
+.padre-series-populares-home {
+    display: flex ;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color:  #f7c4a2;
+    }
+
+.serie-popular-home {
+    display: flex;
+    width: 16%;
+    height: 300px ;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    flex-direction: column;
+    background-color: #96582e6c;   
+    }
+    
+
+.imgserie-home {
+    height: 175px;
+}
+
+/* Termina CSS de series populares*/
+
+/*Empieza CSS de peliculas mas vistas*/
+    
+.section3-home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 10px;
+        flex-direction: column;
+        background-color: #f7c4a2;
+        border: solid 10px black;
+    }
+ 
+.subtitulo3-home {
+    font-size: 30px;
+    font-weight: bold;
+    text-decoration: none;
+    margin: 0;
+    text-align: left;
+    width: 100%;
+}
+
+.padre-mas-visto-serie-home {
+    display: flex ;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color:  #f7c4a2;
+    }
+
+.peli-mas-vista-home {
+    display: flex;
+    width: 16%;
+    height: 300px ;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    flex-direction: column;
+    background-color: #96582e6c;  
+    }
+
+.img-mas-vistas-home {
+    height: 175px;
+}
+
+/* Termina CSS de series mas vistas*/
+
+/********************************************************************************************************
+*                                               CSS DETALLE PELICULAS
+**********************************************************************************************************/
+
+.main-detailmovie {
+    display: flex;
+    flex-direction: row;
+    background-color: #f7c4a2;
+    padding: 10px 20px;
+}
+
+.section-detailmovie {
+    display: flex;
+    flex-direction: column;
+    background-color: #f7c4a2;
+}
+
+/* la clase imagen tambien se uso para detalle series */
+img.imagen {
+    width: 25%;
+    border: solid 15px black;
+    margin-left: 37%;
+    margin-right: 40%;
+}  
+
+.article-detailmovie {
+    background-color: #f7c4a2;
+    text-decoration: black;
+    border: solid 15px black;
+    margin-top: 3%;
+} 
+
+.article-detailmovie h2 {
+    justify-content:right;
+    flex-direction: center;
+    font-weight: 100;
+    font-style: italic;
+    background-color: #96582e6c;
+    
+} 
+
+/* clase p1 tambien se uso para detalle series */
+.rating {
+    background-color:#f7c4a2;
+    text-align: left;
+    font-size: larger;
+    font-weight: normal;
+    font-style: underline;
+    }
+    .fecha {
+        background-color:#f7c4a2;
+        text-align: left;
+        font-size: larger;
+        font-weight: normal;
+        }
+        .generos {
+            background-color:#f7c4a2;
+            text-align: left;
+            font-size: larger;
+            font-weight: normal;
+            }
+            .sinopsis {
+                background-color:#f7c4a2;
+                text-align: left;
+                font-size: larger;
+                font-weight: normal;
+                }
+                .duracion {
+                    background-color:#f7c4a2;
+                    text-align: left;
+                    font-size: larger;
+                    font-weight: normal;
+                    } 
+.generos a {
+    font-weight: normal;
+}
+.bold {
+font-weight: bold;
+text-decoration: underline;
+}
+
+
+
+/* etiqueta span tambien se uso para detalle series */
+span {
+    text-decoration: underline;
+    font-weight: bold;
+    }
+
+/* id button tambien se uso para detalle series */    
+#button {
+    padding: 10px;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    background-color: #96582e6c;
+    font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
+    }
+.article-detailmovie p span {
+    text-decoration: underline;
+    font-weight: bold;
+    }
+
+/********************************************************************************************************
+*                                               CSS DETALLE SERIES
+**********************************************************************************************************/
+
+.main-detailserie {
+    /* display: flex; */
+    flex-direction: row;
+    background-color: #f7c4a2;
+    padding: 10px 20px;
+}
+
+.section-detailserie {
+    display: flex;
+    flex-direction: column;
+    background-color:#f7c4a2;
+} 
+
+.article-detailserie  {
+    background-color: #f7c4a2;
+    text-decoration: black;
+    border: solid 15px black;
+    margin-top: 3%;
+}
+
+.article-detailserie h2 {
+    justify-content:right;
+    flex-direction: center;
+    font-weight: 100;
+    font-style: italic;
+    background-color:#96582e6c;
+}
+
+.article-detailserie .sinopsis{
+    text-align: left;
+    background-color:#f7c4a2;;
+    font-size: larger;
+}
+
+.article-detailserie .fecha a {
+    font-weight: normal;
+}
+.article-detailserie .generos a {
+    font-weight: normal;
+
+}
+.article-detailserie .rating a {
+    font-weight: normal;
+}
+.article-detailserie p span {
+    text-decoration: underline;
+    font-weight: bold;
+
+}
+.generos {
+    display: flex;
+    align-items: row;
+    flex-direction: row;
+}
+.sinopsis span {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.generos span {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.fecha span {
+    text-decoration: underline;
+    font-weight: bold;
+}
+/********************************************************************************************************
+*                                               CSS GENEROS
+**********************************************************************************************************/
+
+/* Empieza CSS de generos con el CSS de main */
+.main-generos {
+    margin: 10px;
+    background-color: #f7c4a2;
+    border: solid black; 
+}
+
+.main-generos h1 {
+    color: black;
+    font-size: 50px;
+    display: flex;
+    justify-content: center;
+    background-color: #f7c4a2;
+}
+
+/* Termina CSS de main y empieza el de la primera sección (peliculas) */
+
+.section-generos-peliculas{
+    display: flex;
+    justify-content:space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: solid;
+    padding: 20px 0px ;
+    margin-bottom: 30px;
+    background-color: #f7c4a2;
+    border: solid 10px black;
+}
+
+.section-generos-peliculas h2 {
+    background-color: #96582e6c;
+    font-weight: bold;
+    width: 100%;
+}
+
+
+
+div.div-generos-p {
+    display : flex;
+    flex-Wrap: wrap;
+    justify-Content : space-between;
+    border: solid;
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    background-color: #f7c4a2;
+    border: solid 10px black;
+
+}
+
+.section-generos-peliculas article {
+    height: 20px;
+    width: 15%;
+    border: solid;
+    background-color: #96582e6c;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+    
+}
+
+.section-generos-peliculas article:hover {
+    color: bisque;
+}
+
+/* Termina CSS de primera sección y empieza el de la segunda sección (series)*/
+
+.section-generos-series {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    flex-direction: column;
+    border: solid;
+    padding: 20px 0px;
+    background-color: #f7c4a2;
+    border: solid 10px black;
+}
+.section-generos-series h2 {
+    background-color: #96582e6c;
+    font-weight: bold;
+    width: 100%;
+}
+
+.section-generos-series article {
+    height: 20px;
+    width: 15%;
+    border: solid;
+    background-color: #96582e6c;
+    padding: 20px;
+    margin: 20px;
+    text-transform: uppercase;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-generos-series article:hover {
+    color: bisque;
+}
+
+div.div-generos-s {
+    display : flex;
+    flex-Wrap: wrap;
+    justify-Content : space-between;
+    border: solid;
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    background-color: #f7c4a2;
+    border: solid 10px black;
+}
+
+/* Termina CSS de segunda sección y todo genres.html */
+
+/********************************************************************************************************
+*                                               CSS DETALLE GENEROS
+**********************************************************************************************************/
+
+/* Empieza CSS de detail-genres.html, donde se uso las mismas clases para ambas sections (la de series y la de peliculas) */
+
+.main-detailgeners{
+    display: flex;
+    flex-direction: column;
+    padding: 100px;
+    background-color:white;
+    font-size:larger;   
+
+}
+.main-detailgeners h1 {
+    color: black;
+    border: solid black;
+    display: inline;
+    background-color: #f7c4a2;
+    text-align: center;
+    font-size: 50px;
+    }
+
+.section-detailgeners{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px ;
+    justify-content: center;
+    align-items: center;
+    background-color:#f7c4a2;
+    border: solid 15px black;
+}
+.section-detailgenersSeries{
+    display: flex;
+    flex-direction: column;
+    padding: 10px 0px ;
+    justify-content: center;
+    align-items: center;
+    background-color:#f7c4a2;
+    border: solid 15px black;
+}
+
+.section-detailgeners h2 {
+    width: 100%;
+    background-color:#96582e6c;
+    font-size: 30px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+.section-detailgenersSeries h2 {
+    width: 100%;
+    background-color:#96582e6c;
+    font-size: 30px;
+    margin-top: 30px;
+    font-weight: bold;
+}
+
+
+
+div.div-detailgeners {
+    display : flex;
+    flex-Wrap: wrap;
+    justify-Content : space-between;
+    border: solid;
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    background-color: #f7c4a2;
+    border: solid 10px black;
+
+}
+
+div.div-detailgeners2 {
+    display : flex;
+    flex-Wrap: wrap;
+    justify-Content : space-between;
+    border: solid;
+    padding: 20px 0px;
+    margin-bottom: 30px;
+    background-color: #f7c4a2;
+    border: solid 10px black;
+
+}
+
+.article-detailgeners{
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+    align-items: center;
+    width: 16%;
+    height: 420px;
+    justify-content: space-around;
+    margin-top: 3%;
+    margin-bottom: 3%;
+    margin: 10px;
+    background-color: #96582e6c;
+}
+
+.article-detailgeners h4 {
+    font-size: 20px;
+    justify-content: center;
+    text-align: center;
+    font-style: normal;
+    }
+
+.article-detailgeners img {
+width: 100%
+ }
+
+/* Termina CSS de detail-genres.html */
+
+/********************************************************************************************************
+*                                               CSS FAVORITOS 
+**********************************************************************************************************/
+
+/* Empieza CSS de Favoritos.html */
+
+.main-favoritos {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    background-color: #f7c4a2;
+}
+
+.section-favoritos {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;;
+    padding: 10px;
+}
+
+.section-favoritos h1 {
+    color: black;
+    background-color: #f7c4a2;
+    text-align: center;
+    font-size: 50px;
+}
+
+.section-favoritos h2 {
+    color:#96582e6c;
+    font-style: italic;
+    text-align: left;
+    font-size: 40px;
+}
+
+.mis-favoritos-series {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color:  #f7c4a2;
+    margin: 10px;
+    border: solid 10px black;
+}
+
+.mis-favoritos-pelis {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background-color:  #f7c4a2;
+    border: solid 10px black;
+    margin: 10px;
+}
+
+.ul-favoritos {
+    display: flex;
+    flex-direction: row;
+}
+
+.favscuadrado {
+        display: flex;
+        align-items:center;
+        padding: 10px;
+        flex-direction: column;
+        margin: 10px;
+        background-color: #96582e6c;
+        }
+
+        .h3favs {
+            margin: 10px
+        }
+    
+        .imgfavs {
+            display: block;
+            align-items: center;
+            width: 100%;
+        }
+
+/* Termina CSS de Favoritos.html */
+
+/********************************************************************************************************
+*                                               CSS RESULTADOS DE BUSQUEDA
+**********************************************************************************************************/
+
+/* Empieza CSS de resultados-de-busqueda.html donde todo aplica a todas las peliculas */
+
+.main-resultados {
+    display: flex;
+    padding: 10px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    background-color: #f7c4a2;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.padre-de-peli-resultados {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.padre-de-series-resultados {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.articulo-peli-resultados {
+    display: flex;
+    background-color: #96582e6c;
+    padding: 10px;
+    border: solid 4px black;
+    align-items: center;
+    margin: 20px;
+    width: 100%;
+
+}
+
+.imgpeli-resultados {
+    align-items: center;
+    height: 200px;
+    justify-content: flex-start;
+}
+
+.padre-info-resultados {
+    display: flex;
+    padding: 20px;
+    flex-direction: column;
+    }
+
+.Titulo-de-peli-resultados {
+    font-size: 20px;
+    font-weight: bold;
+}
+
+.Fecha-estreno-resultados {
+    font-size: 17px;
+    color: rgba(0, 0, 0, 0.637);
+    font-weight:lighter;
+}
+
+.sinopsis-resultados {
+    font-size: 15px;
+    text-align: justify;
+}
+
+/* CSS cuando no coincide la búsqueda con ningún resultado */
+
+.sin-resultados {
+    display: none;
+}
+
+/* Termina CSS de Resultados de busqueda */
+
+/********************************************************************************************************
+*                                               CSS FOOTER 
+**********************************************************************************************************/
+
+/* Empieza CSS de footer con las propiedas generales de este */
+
+footer {
+    display: flex;
+    padding-top: 5px;
+    background-color: white;
+    align-items: center;
+}
+
+/* Empieza CSS del primer div del footer */
+
+.div-logo-footer {
+    width: 47%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.logo-footer {
+    margin: 5px;
+    border-radius: 50%;
+    width: 150px;
+}
+
+.tmdb {
+    margin: 10px;
+    width: 100px;
+    height: 100px;
+}
+
+
+/* Empieza CSS del segundo div del footer */
+
+.integrantes {
+    width: 53%;
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px;
+}
+
+.integrantes ul {
+    display: flex;
+    margin: 5px;
+    list-style: none;
+}
+
+.integrantes ul li a {
+    color: black;
+    text-transform: uppercase;
+    padding: 5px;
+    font-size: 20px
+}
+
+.integrantes ul li a:hover {
+    color: #f7c4a2;
+}
+
+/* Termina CSS de footer */
+
+/********************************************************************************************************
+*                                               CSS RESPONSIVE // MEDIA QUERIES
+**********************************************************************************************************/
+
+/* Usamos la estrategia mobile last */
+
+@media (max-width: 420px) {
+
+/* Comienzo media queries de header */
+    .div-logo-header {
+        width: 15%;
+    }
+
+    .div-logo-header img {
+        width: 100%;
+    }
+    
+    div.div-lista-header {
+        width: 20%;
+        display: flex;
+        align-items: center;
+    }
+
+    .div-lista-header ul {
+        display: flex;
+        justify-content: center;
+    }
+
+    div.div-lista-header a {
+        font-size: 15px;
+    }
+
+    .formulario-header {
+        width: 70%;
+    }
+
+    .buscador-form {
+        width: 20%;
+    }
+
+    header form {
+        font-size: 10px;
+    }
+
+    header form input::placeholder {
+        color:#f7c4a2;
+    }
+
+/* Fin media queries de header */
+
+/* Comienzo media queries de index.html */
+    .padre-peliculas-populares-home {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .Peli-home {
+        width: 100%;
+        border: solid 1px #f7c4a2;
+    }
+
+    .padre-series-populares-home {
+        flex-direction: column;
+    }
+
+    .serie-popular-home {
+        width: 100%;
+        border: solid 1px #f7c4a2; 
+    }
+
+    .padre-mas-visto-serie-home{
+        display: flex;
+        flex-direction: column;
+    }
+    .peli-mas-vista-home {
+        width: 100%;
+        border: solid 1px #f7c4a2; 
+        flex-direction: column; 
+    
+    }
+
+    .serie-mas-vista-home {
+        width: 100%;
+        border: solid 1px #f7c4a2; 
+    }
+
+/* Fin media queries de index.html */
+
+/* Comienzo media queries de footer */
+
+    .div-logo-footer {
+    width: 50%;
+    display: flex;
+    justify-content: center;
+    }
+
+    .logo-footer {
+    width: 50%;
+    }   
+
+    .tmdb {
+        width: 50%;
+        height: 50%;
+    }
+    .integrantes {
+        width: 50%;
+    }
+
+    footer .integrantes ul {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .integrantes ul li a {
+        font-size: 15px;
+    }
+
+/* Fin media queries de footer */
+
+/* Comienzo media queries de resultados-de-búsqueda.html */
+
+    .articulo-peli-resultados {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .padre-info-resultados {
+        text-align: center;
+    }
+    
+/* Fin media queries de resultados-de-búsqueda.html */
+
+/* Comienzo media queries de favoritos.html */
+
+    .ul-favoritos {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .favscuadrado {
+        width: 100%;
+        border: solid 1px #f7c4a2; 
+        display: flex;
+        justify-content: center;
+        margin-left: 5px;
+        margin-right: 10px;
+    }
+
+/* Fim media queries de favoritos.html */
+
+/* Comienzo media queries de genres.html */
+
+    .section-generos-peliculas .div-generos {
+        flex-direction: column;
+    }
+
+    .section-generos-series div {
+        width: 100%;
+        flex-direction: column;
+    }
+
+    .article-generos a {
+        font-weight: bold;
+        text-decoration: none;
+        color: black;
+        display: flex;
+        justify-content: center;
+    }
+
+    div .article-generos {
+        width: 80%;
+        margin-left: 10%;
+        margin-right: 10%;
+
+    }
+/* Fin media queries de genres.html */
+
+/* Comienzo media queries de detail-movie.html */
+
+    .article-detailmovie {
+        width: 100%;
+        border: solid 2px black;
+    }
+
+    .section-detailmovie {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .section-detailmovie .imagen {
+    border: solid 2px black;
+    width: 60%;
+    }
+
+/* Fin media queries de detail-movie.html */
+
+/* Comienzo media queries de detail-serie.html */
+
+    .main-detailserie{
+     display: flex;
+     justify-content: center;
+    }
+
+    .section-detailserie {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .section-detailserie .imagen {
+    border: solid 2px black;
+    width: 60%;
+    }
+
+     .article-detailserie {
+         width: 100%;
+         border: solid 2px black; 
+     }
+
+
+/* Fin media queries de detail-serie.html */
+
+/* Comienzo media queries de detail-genres.html */
+
+    div.div-detailgeners {
+        display: flex;
+        flex-direction: column
+    }
+
+    .article-detailgeners {
+        width: 100%;
+        margin: 10px 0px;
+    }
+
+    .section-detailgeners h2 {
+        font-size: 30px;
+        text-align: center;
+    }
+
+    .main-detailgeners {
+        padding: 60px;
+    }
+
+    .main-detailgeners h1{
+        font-size: 50px
+    }
+
+    /* Fin media queries detail-genres.html */
+        }
+    

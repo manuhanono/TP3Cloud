@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Indicamos que se pueda usar caracteres especiales como tildes o la ñ-->
+    <meta charset="UTF-8">
+
+    <!--Utilizamos estas etiquetas a continuación para lograr una página responsive-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Linkeamos con la hoja de CSS para poder darle el estilo que deseamos-->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!--Usamos la etiqueta title para ponerle un nombre en la solapa arriba de todo -->
+    <title> Géneros </title>
+</head>
+
+<body>
+
+    <!-- Comienzo encabezado -->
+
+    <header id="header">
+
+        <div class="div-logo-header">
+        </div>
+
+        <div class="div-lista-header">
+            <ul>
+                <li><a href="index.html"> HOME </a></li>
+
+                <li><a href="genres.html"> GÉNEROS </a></li>
+            </ul>
+        </div>
+
+        <div class="formulario-header">
+            <form action="./Resultados-de-búsqueda.html" method="GET">
+                <input class="buscador-form" type="radio" name="media" value="all" checked>
+                <label for="">Todo</label>
+
+                <input id="Buscador" class="search" type="text" name="buscador" placeholder="Buscar">
+                <button type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
+                <p class="message"></p>
+            </form>
+        </div>
+
+    </header>
+    <!-- Fin header -->
+
+    <!-- Comienzo lista de géneros de peliculas-->
+
+    <main class="main-generos">
+        <h1>Géneros</h1>
+
+        <section class="section-generos-peliculas">
+            <h2> Películas</h2>
+
+            <div class="div-generos-p">
+                <!--  <article class="article-generos"><a href="detail-genres.html">Acción</a></article>
+                <article class="article-generos"><a href="detail-genres.html">Drama</a></article>
+                <article class="article-generos"><a href="detail-genres.html">Terror</a></article>
+                <article class="article-generos"><a href="detail-genres.html">Comedia</a></article> -->
+
+            </div>
+
+
+
+
+
+        </section>
+
+    </main>
+
+    <!--------------------------------------Comienzo pie de página -------------------------------------->
+    <footer>
+
+        <div class="div-logo-footer">
+            <img class="tmdb" src="./img/tmdb.png" alt="TMDB logo">
+        </div>
+
+    </footer>
+    <!--------------------------------------Fin del Footer-------------------------------------->
+    <script src="./js/genres.js" type="text/javascript"></script>
+
+</body>
+<!--------------------------------------Fin Body -------------------------------------->
+<script src="./js/header.js"></script>
+
+</html>
