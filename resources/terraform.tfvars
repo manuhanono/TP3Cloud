@@ -23,11 +23,46 @@ tables = {
   movies = "movies"
 }
 lambda_functions = [{
-  name        = "getCont"
+  name        = "getMovies"
   description = "Trae el contenido de TMDB"
   handler     = "index.lambda_handler"
   runtime     = "python3.8"
+  source_path = "python/getMovies.py"
+},
+{
+  name        = "getCont"
+  description = "Trae el contenido de DynamoDB a la página"
+  handler     = "index.lambda_handler"
+  runtime     = "python3.8"
   source_path = "python/getCont.py"
+},
+{
+  name        = "comentFav"
+  description = "Permite comentar y almacenar en DynamoDB"
+  handler     = "index.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/comentFav.py"
+},
+{
+  name        = "searchBar"
+  description = "Busca el contenido en DynamoDB y lo refleja en el sitio"
+  handler     = "index.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/searchBar.py"
+},
+{
+  name        = "voteFav"
+  description = "Opina sobre el contenido y se almacena en DynamoDB"
+  handler     = "index.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/voteFav.py"
+},
+{
+  name        = "redirCont"
+  description = "Trae el contenido de TMDB"
+  handler     = "index.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/redirCont.py"
 }
 ]
 
