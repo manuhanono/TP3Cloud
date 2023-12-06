@@ -23,10 +23,11 @@ tables = {
   movies = "movies"
 }
 lambda_functions = [{
-  name        = "prueba-lambda-numero-1000"
-  description = "Lambda de prueba"
+  name        = "getCont"
+  description = "Trae el contenido de TMDB"
   handler     = "index.lambda_handler"
   runtime     = "python3.8"
-  source_path = "python/index.py"
-}]
+  source_path = "python/getCont.py"
+}
+]
 
