@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Indicamos que se pueda usar caracteres especiales como tildes o la ñ-->
+    <meta charset="UTF-8">
+
+    <!--Utilizamos estas etiquetas a continuación para lograr una página responsive-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!--Linkeamos con la hoja de CSS para poder darle el estilo que deseamos-->
+    <link rel="stylesheet" href="./css/style.css">
+
+    <!--Usamos la etiqueta title para ponerle un nombre en la solapa arriba de todo -->
+    <title> Detalle de pelicula </title>
+</head>
+
+<body>
+    <!-- Comienzo encabezado -->
+
+    <header id="header">
+
+        <div class="div-lista-header">
+            <ul>
+                <li><a href="index.html"> HOME </a></li>
+
+                <li><a href="genres.html"> GÉNEROS </a></li>
+            </ul>
+        </div>
+
+        <div class="formulario-header">
+            <form action="./Resultados-de-búsqueda.html" method="GET">
+                <input class="buscador-form" type="radio" name="media" value="all" checked>
+                <label for="">Todo</label>
+              
+                <input id="Buscador" class="search" type="text" name="buscador" placeholder="Buscar">
+                <button type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
+                <p class="message"></p>
+            </form>
+        </div>
+
+    </header>
+    <!-- Fin encabezado-->
+
+    <main class="main-detailmovie">
+        <section class="section-detailmovie">
+
+            <img class="imagen" src=" " alt="No se encuentra la imagen">
+
+            <article class="article-detailmovie">
+                <h2 class="titulo"></h2>
+
+                <p class="rating"><span>Rating: </span> <a href="https://www.imdb.com/title/tt6468322/?ref_=fn_al_tt_1"
+                        target="_blank"></a></p>
+                <p class="fecha"><span>Fecha de estreno: </span></p>
+                <p class="duracion"><span>Duración: </span> </p>
+                <p class="generos"> <span> Géneros: </span> </p>
+                <p class="sinopsis"><span>Sinopsis: </span> </p>
+
+                <button id="button">Agragar a favoritos</button>
+
+
+            </article>
+
+        </section>
+    </main>
+
+    <!--------------------------------------Comienzo footer -------------------------------------->
+    <footer>
+
+        <div class="div-logo-footer">
+            <img class="tmdb" src="./img/tmdb.png" alt="TMDB logo">
+        </div>
+
+    </footer>
+    <!--------------------------------------Fin del footer-------------------------------------->
+</body>
+<!--------------------------------------Fin del body-------------------------------------->
+<script src="./js/detailmovie.js" type="Text/javascript"></script>
+<script src="./js/header.js"></script>
+
+</html>
