@@ -1,13 +1,47 @@
+//falla enviar, no envia nada. probar alternativas
+
 // foro.js
 
-// Lógica para interactuar con DynamoDB y manejar el foro
-$(document).ready(function () {
-    // Verificar si el usuario está autenticado antes de mostrar la página del foro
-    if (!usuarioAutenticado()) {
-      // Redirigir a la página de inicio de sesión u otra página de acceso
-      window.location.href = 'login.html';
-    }
-  
+
+// Lógica para cargar las opciones de película desde la API Gateway/Lambda/DynamoDB
+//function cargarOpcionesPeliculas() {
+  // Aquí debes implementar la llamada a tu API Gateway para obtener las opciones de películas
+  // y llenar dinámicamente el select con las opciones recibidas
+  // Puedes utilizar jQuery.ajax o Fetch API para realizar la llamada
+//}
+
+// Lógica para enviar el comentario a DynamoDB
+//function enviarComentario() {
+  //const peliculaSeleccionada = document.getElementById('pelicula').value;
+  //const comentario = document.getElementById('comentario').value;
+
+  // Aquí debes implementar la llamada a tu API Gateway que se conecta con Lambda y DynamoDB
+  // para guardar el comentario, la película, la fecha, el horario y el nombre del usuario
+  // Puedes utilizar jQuery.ajax o Fetch API para realizar la llamada
+//}
+
+/* Cargar las opciones de película cuando la página esté lista
+$(document).ready(function() {
+  cargarOpcionesPeliculas();
+});
+
+*/
+
+// Archivo formulario.js
+
+// Lógica para probar la funcionalidad de enviar el comentario
+function enviarComentario() {
+  const comentario = document.getElementById('comentario').value;
+
+  // Muestra el comentario en la consola (simula la llamada al backend)
+  console.log('Comentario:', comentario);
+  console.log('¡Llamada al backend simulada con éxito!');
+}
+document.getElementById('enviarComentario').addEventListener('click', enviarComentario);
+
+
+/*
+
     // Lógica para guardar un comentario en el foro
     function guardarComentario(comentario) {
         const params = {
@@ -86,5 +120,5 @@ function mostrarComentarios(comentarios) {
       obtenerComentarios();
     });
   
-  });
+*/
   
