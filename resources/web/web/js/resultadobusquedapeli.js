@@ -1,7 +1,19 @@
 
 //Resultado de busqueda de pelicula//
 
-let queryStringPelis = location.search // capturando la query que construyó el usuario cuando buscó una palabra
+function buscarContenido(query) {
+    const apiUrl = 'URL_DE_TU_API_GATEWAY/search_cont'; // Reemplaza con la URL real de tu API Gateway
+
+    fetch(`${apiUrl}?query=${encodeURIComponent(query)}`)
+        .then(response => response.json())
+        .then(data => {
+            console.log('Resultados de la búsqueda:', data);
+            // Aquí puedes actualizar la interfaz de usuario con los resultados
+        })
+        .catch(error => console.error('Error al buscar:', error));
+}
+
+/*let queryStringPelis = location.search // capturando la query que construyó el usuario cuando buscó una palabra
 let OLPelis = new URLSearchParams(queryStringPelis);  // a un objeto literal
 let queryPelis = OLPelis.get('buscador'); // capturando el valor de la clave "buscador"
 let tipo = OLPelis.get('media');
@@ -78,4 +90,4 @@ window.addEventListener('load', function (e) {
     let gif = document.querySelector(".gif")
     gif.style.display = "none";
 
-})
+}) */
