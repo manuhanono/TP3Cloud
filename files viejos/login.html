@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mi Página de Películas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        #login-link {
+            color: blue;
+            text-decoration: none;
+            margin-right: 20px;
+        }
+        #movie-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .movie-box {
+            width: 200px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #forum-tab {
+            background-color: #eee;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Mi Página de Películas</h1>
+
+    <!-- Enlace para iniciar sesión -->
+    <a id="login-link" href="https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/logout?client_id=7ihb8s86hfdti40rp3jj772cvs&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fd2r9b1bo9i3dqw.cloudfront.net">Salir de Sesión</a>
+
+    <!-- Cajas para mostrar fotos de películas -->
+    <div id="movie-container">
+        <div class="movie-box">
+            <img src="url_de_la_imagen_1.jpg" alt="Película 1">
+            <p>Nombre de la Película 1</p>
+        </div>
+        <div class="movie-box">
+            <img src="url_de_la_imagen_2.jpg" alt="Película 2">
+            <p>Nombre de la Película 2</p>
+        </div>
+        <!-- Agrega más cajas según sea necesario -->
+    </div>
+
+    <!-- Pestaña para el foro -->
+    <div id="forum-tab">
+        <h2>Foro</h2>
+        <!-- Agrega el contenido del foro aquí -->
+        <p>Discusiones, comentarios, etc.</p>
+    </div>
+
+</body>
+</html>

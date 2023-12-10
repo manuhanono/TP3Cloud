@@ -25,7 +25,22 @@ variable "write_capacity" {
 }
 
 variable "tables" {
-  type        = map(string)
+    type = list(object({
+    name        = string
+    hash_key = string
+    range_key     = string
+    attributes     = list(object({
+      name = string
+      type = string
+    }))
+    global_secondary_indexes     = list(object({
+      name               = string
+      hash_key           = string
+      range_key          = string
+      projection_type    = string
+      non_key_attributes = list(string)
+    }))
+  }))
   description = "Table names for DynamoDB"
 }
 

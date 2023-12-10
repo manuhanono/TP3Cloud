@@ -1,37 +1,16 @@
 module "dynamodb" {
-  for_each       = var.tables
+  count       = length(var.tables)
   source         = "terraform-aws-modules/dynamodb-table/aws"
-  name           = each.value
-  hash_key       = "Provider"
-  range_key      = "Nombre"
+  
+  name           = var.tables[count.index].name
+  hash_key       = var.tables[count.index].hash_key
+  range_key      = var.tables[count.index].range_key
   # billing_mode   = "PROVISIONED"
   # read_capacity  = var.read_capacity
   # write_capacity = var.write_capacity
 
-  attributes = [
-    {
-      name = "Provider"
-      type = "S"
-    },
-    {
-      name = "Nombre"
-      type = "S"
-    },
-        {
-      name = "Género"
-      type = "S"
-    }
-  ]
-
-    global_secondary_indexes = [
-    {
-      name               = "GeneroIndex"
-      hash_key           = "Provider"
-      range_key          = "Género"
-      projection_type    = "INCLUDE"
-      non_key_attributes = ["Nombre"]
-    }
-  ]
+  attributes = var.tables[count.index].attributes
+  global_secondary_indexes = var.tables[count.index].global_secondary_indexes
 
   tags = {
     Terraform   = "true"

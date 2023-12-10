@@ -17,52 +17,104 @@ vpc_endpoints = {
 }
 read_capacity  = 5
 write_capacity = 5
-tables = {
-  forum = "forum",
-  users = "users",
-  movies = "movies"
+
+tables = [{
+  name           = "movies"
+  hash_key       = "Provider"
+  range_key      = "Nombre"
+  # billing_mode   = "PROVISIONED"
+  # read_capacity  = var.read_capacity
+  # write_capacity = var.write_capacity
+
+  attributes = [
+    {
+      name = "Provider"
+      type = "S"
+    },
+    {
+      name = "Nombre"
+      type = "S"
+    },
+        {
+      name = "Género"
+      type = "S"
+    }
+  ]
+    global_secondary_indexes = [
+    {
+      name               = "GeneroIndex"
+      hash_key           = "Provider"
+      range_key          = "Género"
+      projection_type    = "INCLUDE"
+      non_key_attributes = ["Nombre"]
+    }
+  ]
+}, 
+{
+  name           = "users"
+  hash_key       = "id"
+  range_key      = "mail"
+  attributes = [{
+      name = "id"
+      type = "S"
+    },
+    {
+      name = "mail"
+      type = "S"
+    },
+        {
+      name = "Género"
+      type = "S"
+    }]
+    global_secondary_indexes = [{
+      name               = "GeneroIndex"
+      hash_key           = "id"
+      range_key          = "Género"
+      projection_type    = "INCLUDE"
+      non_key_attributes = ["Nombre"]
+    }]
+}, 
+{
+  name           = "forum"
+  hash_key       = "id"
+  range_key      = "Canal"
+  attributes = [{
+      name = "id"
+      type = "S"
+    },
+    {
+      name = "Canal"
+      type = "S"
+    },
+        {
+      name = "Género"
+      type = "S"
+    }]
+    global_secondary_indexes = [
+    {
+      name               = "GeneroIndex"
+      hash_key           = "id"
+      range_key          = "Género"
+      projection_type    = "INCLUDE"
+      non_key_attributes = ["Nombre"]
+    }]
 }
+]
+
+
 lambda_functions = [{
   name        = "getMovies"
   description = "Trae el contenido de TMDB"
-  handler     = "index.lambda_handler"
+  handler     = "getMovies.lambda_handler"
   runtime     = "python3.8"
   source_path = "python/getMovies.py"
 },
 {
-  name        = "getCont"
-  description = "Trae el contenido de DynamoDB a la página"
-  handler     = "index.lambda_handler"
+  name        = "updateUsers"
+  description = "Actualiza la base cuando se autentica un usuario"
+  handler     = "getMovies.lambda_handler"
   runtime     = "python3.8"
-  source_path = "python/getCont.py"
-},
-{
-  name        = "comentFav"
-  description = "Permite comentar y almacenar en DynamoDB"
-  handler     = "index.lambda_handler"
-  runtime     = "python3.8"
-  source_path = "python/comentFav.py"
-},
-{
-  name        = "searchBar"
-  description = "Busca el contenido en DynamoDB y lo refleja en el sitio"
-  handler     = "index.lambda_handler"
-  runtime     = "python3.8"
-  source_path = "python/searchBar.py"
-},
-{
-  name        = "voteFav"
-  description = "Opina sobre el contenido y se almacena en DynamoDB"
-  handler     = "index.lambda_handler"
-  runtime     = "python3.8"
-  source_path = "python/voteFav.py"
-},
-{
-  name        = "redirCont"
-  description = "Trae el contenido de TMDB"
-  handler     = "index.lambda_handler"
-  runtime     = "python3.8"
-  source_path = "python/redirCont.py"
+  source_path = "python/getMovies.py"
 }
 ]
 
