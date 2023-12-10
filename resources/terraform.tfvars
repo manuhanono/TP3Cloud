@@ -20,7 +20,7 @@ write_capacity = 5
 
 tables = [{
   name           = "movies"
-  hash_key       = "Provider"
+  hash_key       = "id"
   range_key      = "Nombre"
   # billing_mode   = "PROVISIONED"
   # read_capacity  = var.read_capacity
@@ -28,8 +28,8 @@ tables = [{
 
   attributes = [
     {
-      name = "Provider"
-      type = "S"
+      name = "id"
+      type = "N"
     },
     {
       name = "Nombre"
@@ -43,7 +43,7 @@ tables = [{
     global_secondary_indexes = [
     {
       name               = "GeneroIndex"
-      hash_key           = "Provider"
+      hash_key           = "id"
       range_key          = "Género"
       projection_type    = "INCLUDE"
       non_key_attributes = ["Nombre"]
