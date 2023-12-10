@@ -8,7 +8,20 @@
 </head>
 <body>
   <!-- Contenido de la página del foro -->
-  <!-- ... -->
+
+  <h1>Formulario de Comentarios</h1>
+
+  <form id="formularioComentarios">
+   <!-- <label for="pelicula">Pelicula:</label>
+    <select id="pelicula" name="pelicula" required>
+    </select>
+-->
+    <label for="comentario">Comentario (0-200 palabras):</label>
+    <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
+
+    <button type="button" id="enviarComentario">Enviar</button>
+  </form>
+
 
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>

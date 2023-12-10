@@ -1,50 +1,47 @@
 import json
-import http.client
 import boto3
 
-tmdb_api_key = 'f7217514a52cbe38077b943dca1f538a'  # Reemplaza con tu propia clave de API de TMDb
-dynamodb_table_name = 'movies'  # Reemplaza con el nombre real de tu tabla DynamoDB
+dynamodb = boto3.resource('dynamodb')
+table_name = 'movies'
 
 def lambda_handler(event, context):
     try:
-        # Realiza la solicitud a la API de The Movie Database (TMDb) para obtener todas las películas
-        # Estamos trayendo mal la info. Hay que buscar bien en la API de que link extraer cada parte para traer toda la info bien.
-        tmdb_host = 'api.themoviedb.org'
-        tmdb_path = '/3/discover/movie'
-        params = f'?api_key={tmdb_api_key}'
+        # Extraer el término de búsqueda del evento
+        search_term = event['queryStringParameters']['query']
 
-        connection = http.client.HTTPSConnection(tmdb_host)
-        connection.request('GET', tmdb_path + params)
-        tmdb_response = connection.getresponse()
-        tmdb_data = json.loads(tmdb_response.read().decode())
-
-        # Selecciona solo dos registros de la lista de resultados
-        selected_movies = tmdb_data.get('results', [])[:2]
-
-        # Inicializa el cliente DynamoDB
-        dynamodb = boto3.resource('dynamodb')
-        table = dynamodb.Table(dynamodb_table_name)
-
-        # Escribe los datos extraídos en la tabla DynamoDB
-        for movie in selected_movies:
-            item = {
-                'Provider': str(movie.get('id', '')),
-                'Nombre': movie.get('title', ''),
-                'Sinopsis': movie.get('overview', ''),
-                'Género': "Infantil"
+        # Parámetros de consulta para DynamoDB
+        params = {
+            'TableName': table_name,
+            'IndexName': 'NombreDelIndice',  # Si tienes un índice que facilita la búsqueda
+            'KeyConditionExpression': 'titulo CONTAINS :term',  # Modifica según tu esquema de DynamoDB
+            'ExpressionAttributeValues': {
+                ':term': search_term.lower()
             }
-            table.put_item(Item=item)
+        }
 
-        # Retorna una respuesta exitosa si la escritura en DynamoDB es exitosa
+        # Realizar la búsqueda en DynamoDB
+        results = buscar_en_dynamodb(params)
+
+        # Retornar resultados
         return {
             'statusCode': 200,
-            'body': json.dumps('Datos almacenados en DynamoDB exitosamente')
+            'headers': {
+                'Content-Type': 'application/json',
+            },
+            'body': json.dumps(results)
         }
-
     except Exception as e:
-        # Retorna un mensaje de error si hay un problema de conexión o escritura en DynamoDB
+        print('Error al buscar en DynamoDB:', str(e))
         return {
             'statusCode': 500,
-            'body': json.dumps(f"Error: {str(e)}")
+            'body': json.dumps({'message': 'Error al buscar en DynamoDB'})
         }
+
+def buscar_en_dynamodb(params):
+    # Implementa la lógica de búsqueda en DynamoDB aquí
+    # Usa la variable "dynamodb" para interactuar con la tabla DynamoDB
+    # Retorna los resultados de la búsqueda
+    table = dynamodb.Table(params['TableName'])
+    response = table.query(**params)
+    return response.get('Items', [])
 
