@@ -80,22 +80,32 @@ variable "role" {
   description = "Role for the Lambda"
 }
 
-variable "api_name" {
-  description = "Nombre de la API Gateway"
-  type        = string
-}
+# variable "api_name" {
+#   description = "Nombre de la API Gateway"
+#   type        = string
+# }
 
-variable "api_description" {
-  description = "Descripción de la API Gateway"
-  type        = string
-}
+# variable "api_description" {
+#   description = "Descripción de la API Gateway"
+#   type        = string
+# }
 
-variable "resource_path" {
-  description = "Ruta de la API"
-  type        = string
-}
+# variable "resource_path" {
+#   description = "Ruta de la API"
+#   type        = string
+# }
 
-variable "api_stage_name" {
-  description = "Nombre del stage de la API"
-  type        = string
+# variable "api_stage_name" {
+#   description = "Nombre del stage de la API"
+#   type        = string
+# }
+
+variable "api_gateways" {
+  description = "List of API Gateways to create"
+  type = list(object({
+    api_name        = string
+    api_description = string
+    resource_path = string
+    api_stage_name = string
+  }))
 }

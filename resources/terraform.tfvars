@@ -5,10 +5,14 @@ availability_zones   = ["us-east-1a", "us-east-1b"]
 public_subnet_count  = 1
 private_subnet_count = 2
 role                 = "arn:aws:iam::824206024463:role/LabRole"
-api_name             = "APIGW-G05"
-api_description      = "APIGW para la función Lambda, TP3 del G05"
-resource_path        = "myresource"
-api_stage_name       = "dev"
+api_gateways = [ {
+  api_name             = "APIGW-G05"
+  api_description      = "APIGW para searchBar"
+  resource_path        = "myresource"
+  api_stage_name       = "dev"
+} ]
+
+
 vpc_endpoints = {
   dynamodb = {
     service_name  = "com.amazonaws.us-east-1.dynamodb"
