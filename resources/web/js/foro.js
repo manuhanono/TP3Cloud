@@ -1,33 +1,35 @@
-//falla enviar, no envia nada. probar alternativas
-
-// foro.js
-
-
-// Lógica para cargar las opciones de película desde la API Gateway/Lambda/DynamoDB
-//function cargarOpcionesPeliculas() {
-  // Aquí debes implementar la llamada a tu API Gateway para obtener las opciones de películas
-  // y llenar dinámicamente el select con las opciones recibidas
-  // Puedes utilizar jQuery.ajax o Fetch API para realizar la llamada
-//}
-
-// Lógica para enviar el comentario a DynamoDB
-//function enviarComentario() {
-  //const peliculaSeleccionada = document.getElementById('pelicula').value;
-  //const comentario = document.getElementById('comentario').value;
-
-  // Aquí debes implementar la llamada a tu API Gateway que se conecta con Lambda y DynamoDB
-  // para guardar el comentario, la película, la fecha, el horario y el nombre del usuario
-  // Puedes utilizar jQuery.ajax o Fetch API para realizar la llamada
-//}
-
-/* Cargar las opciones de película cuando la página esté lista
-$(document).ready(function() {
-  cargarOpcionesPeliculas();
-});
-
-*/
-
 // Archivo formulario.js
+
+//datos para simular rta de lambda
+const comentariosDePrueba = [
+  'Comentario de prueba 1',
+  'Comentario de prueba 2',
+  'Comentario de prueba 3',
+];
+
+function cargarOpcionesPeliculas() {
+  // Llamada a la Lambda o cualquier otra lógica para obtener las películas
+  // Simulación de opciones de películas
+  const peliculas = ['Película 1', 'Película 2', 'Película 3'];
+
+  // Obtener el elemento select
+  const selectPelicula = document.getElementById('pelicula');
+
+  // Limpiar opciones existentes (por si acaso)
+  selectPelicula.innerHTML = '';
+
+  // Agregar las opciones al elemento select
+  peliculas.forEach((pelicula) => {
+    const opcion = document.createElement('option');
+    opcion.value = pelicula;
+    opcion.textContent = pelicula;
+    selectPelicula.appendChild(opcion);
+  });
+}
+
+// Llama a la función para cargar las opciones al cargar la página
+window.addEventListener('load', cargarOpcionesPeliculas);
+
 
 // Lógica para probar la funcionalidad de enviar el comentario
 function enviarComentario() {
@@ -36,8 +38,54 @@ function enviarComentario() {
   // Muestra el comentario en la consola (simula la llamada al backend)
   console.log('Comentario:', comentario);
   console.log('¡Llamada al backend simulada con éxito!');
+
+  comentariosDePrueba.push(comentario);
+
+
+  mostrarComentarios(comentariosDePrueba);
+
+  actualizarListaComentarios(); 
 }
+
+async function actualizarListaComentarios() {
+  try {
+    // Realizar una solicitud a la Lambda que obtiene los comentarios
+    const response = await fetch('URL_DE_TU_LAMBDA', {
+      method: 'GET',
+    });
+
+    if (!response.ok) {
+      throw new Error('No se pudo obtener la lista de comentarios.');
+    }
+    // Convertir la respuesta a JSON
+    const comentarios = await response.json();
+
+    // Mostrar los comentarios en la página
+    mostrarComentarios(comentarios);
+  } catch (error) {
+    console.error('Error al obtener comentarios:', error.message);
+    // Puedes manejar el error de la manera que prefieras (por ejemplo, mostrar un mensaje al usuario).
+  }
+}
+
+function mostrarComentarios(comentarios) {
+  const listaComentarios = document.getElementById('listaComentarios');
+  listaComentarios.innerHTML = ''; // Limpiar la lista antes de agregar nuevos comentarios
+
+  if (comentarios.length === 0) {
+    listaComentarios.innerHTML = '<p>No hay comentarios aún.</p>';
+  } else {
+    comentarios.forEach((comentario) => {
+      const elementoComentario = document.createElement('p');
+      elementoComentario.textContent = comentario;
+      listaComentarios.appendChild(elementoComentario);
+    });
+  }
+}
+
+
 document.getElementById('enviarComentario').addEventListener('click', enviarComentario);
+window.addEventListener('load', actualizarListaComentarios);
 
 
 /*

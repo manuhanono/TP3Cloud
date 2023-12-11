@@ -29,6 +29,7 @@
                 <li><a href="index.html"> HOME </a></li>
 
                 <li><a id="botonForo" href="foro.html"> FORO </a></li>
+
             </ul>
         </div>
 
@@ -161,6 +162,9 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1031.0/aws-sdk.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-cognito-sdk/5.0.3/aws-cognito-sdk.min.js"></script>
 
-
+<script src="autenticacion.js"></script>
+<script>
+    document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
+</script>
 
 </html>
