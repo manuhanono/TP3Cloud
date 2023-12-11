@@ -1,10 +1,7 @@
-
-//VERIFIQUE QUE FUNCIONA SIN COGNITO. LA LOGICA REDIRECCIONA A LOGIN CUANDO NO HAY USUARIO AUTENTICADO
-//PROBAR CON COGNITO. EN CASO DE ESTAR LOGIN, TE MANDA AL FORO. EN CASO DE QUE NO, AL LOGIN
 // Configuración de Amazon Cognito
 const poolData = {
-    UserPoolId: 'tu_user_pool_id',
-    ClientId: 'tu_app_client_id'
+    UserPoolId: 'us-east-1_q7PTL7fO7',
+    ClientId: '7u525asb2pf0q0fud6fh1hn5n7'
 };
 
 const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
@@ -22,28 +19,10 @@ function verificarAutenticacion(event) {
     window.location.href = event.target.href;
   } else {
     // El usuario no está autenticado, redirige al login de Cognito
-    window.location.href = 'login.html';
+    window.location.href = 'https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/login?client_id=7u525asb2pf0q0fud6fh1hn5n7&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fd1i2ps8v0vw7sh.cloudfront.net%2Flogin.html';
 
   }
 }
-/*
-function verificarAutenticacion(event) {
-  // Evitar que el enlace se abra de inmediato
-  event.preventDefault();
-
-  // Utilizar las funciones de Cognito para verificar la autenticación
-  const usuarioActual = 'SOL'
-
-  if (usuarioActual=='SOL') {
-    // El usuario está autenticado, redirige a foro.html
-    window.location.href = event.target.href;
-  } else {
-    // El usuario no está autenticado, redirige al login de Cognito
-    window.location.href = 'login.html';
-  }}
-
-*/
 
 // Asociar la función al evento de clic en el enlace "FORO"
 document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
-

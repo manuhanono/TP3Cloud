@@ -29,13 +29,14 @@
                 <li><a href="index.html"> HOME </a></li>
 
                 <li><a href="genres.html"> GÉNEROS </a></li>
+
+                <li><a id="botonForo" href="foro.html"> FORO </a></li>
             </ul>
         </div>
 
         <div class="formulario-header">
             <form action="./Resultados-de-búsqueda.html" method="GET">
                 <input class="buscador-form" type="radio" name="media" value="all" checked>
-                <label for="">Todo</label>
 
                 <input id="Buscador" class="search" type="text" name="buscador" placeholder="Buscar">
                 <button type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
@@ -122,12 +123,12 @@
         <!-- Fin peliculas populares -->
 
     <!-- Scripts -->
-    <button id="btnIniciarSesion" onclick="abrirNuevaPestana()">Iniciar Sesión con Google</button>
+    <button id="btnIniciarSesion" onclick="abrirNuevaPestana()">Iniciar Sesión para poder participar en el foro</button>
 
     <script>
       function abrirNuevaPestana() {
         // URL de inicio de sesión de Google
-        var nuevaURL = 'https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/login?client_id=7jcprn0vr3jbs5vf9fsvlup032&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fdzog6wpxn5nz1.cloudfront.net%2Flogin.html';
+        var nuevaURL = 'https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/login?client_id=7u525asb2pf0q0fud6fh1hn5n7&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fd1i2ps8v0vw7sh.cloudfront.net%2Flogin.html';
     
         // Abrir una nueva pestaña con la URL de Google
         window.open(nuevaURL, '_blank');
@@ -156,5 +157,12 @@
 <!--------------------------------------Fin Body -------------------------------------->
 <script src="./js/header.js"></script>
 <script src="./js/home.js" type="text/javascript"></script>
+<script src="./js/autenticacion.js" type="text/javascript"></script>
+
+<!-- Añadir referencia al SDK de AWS en tu HTML -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1031.0/aws-sdk.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aws-cognito-sdk/5.0.3/aws-cognito-sdk.min.js"></script>
+
+
 
 </html>
