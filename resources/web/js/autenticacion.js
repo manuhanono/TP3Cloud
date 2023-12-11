@@ -1,10 +1,13 @@
+
 // Configuración de Amazon Cognito
 const poolData = {
-    UserPoolId: 'us-east-1_q7PTL7fO7',
-    ClientId: '7u525asb2pf0q0fud6fh1hn5n7'
+    UserPoolId: 'us-east-1_zh8H4WxGm',
+    ClientId: '7vel4nc12cbipbvn366jdbc1h1'
 };
 
-const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData);
+console.log(AmazonCognitoIdentity);
+
+const userPool = new AmazonCognitoIdentity.CognitoUserPool(poolData); 
 
 // Función para verificar si el usuario está autenticado
 function verificarAutenticacion(event) {
@@ -12,7 +15,7 @@ function verificarAutenticacion(event) {
   event.preventDefault();
 
   // Utilizar las funciones de Cognito para verificar la autenticación
-  const usuarioActual = AmazonCognitoIdentity.CognitoUserPool.getCurrentUser();
+  const usuarioActual = userPool.getCurrentUser();
 
   if (usuarioActual) {
     // El usuario está autenticado, redirige a foro.html
