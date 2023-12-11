@@ -38,7 +38,7 @@ variable "tables" {
       hash_key           = string
       range_key          = string
       projection_type    = string
-      non_key_attributes = list(string)
+  #    non_key_attributes = list(string)
     }))
   }))
   description = "Table names for DynamoDB"

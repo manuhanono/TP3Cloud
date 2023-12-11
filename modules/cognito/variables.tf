@@ -19,6 +19,11 @@ variable "callback_url" {
   description = "Callback URL (a donde quiere acceder)"
 }
 
+# variable "lambda_arn" {
+#   type        = string
+#   description = "ARN de la función lambda que actualiza la base users en dynamodb"
+# }
+
 
 
 

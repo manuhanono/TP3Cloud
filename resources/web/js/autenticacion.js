@@ -23,30 +23,5 @@ function verificarAutenticacion(event) {
 
   }
 }
-<<<<<<< HEAD
-
 // Asociar la función al evento de clic en el enlace "FORO"
 document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
-=======
-/*
-function verificarAutenticacion(event) {
-  // Evitar que el enlace se abra de inmediato
-  event.preventDefault();
-
-  // Utilizar las funciones de Cognito para verificar la autenticación
-  const usuarioActual = 'SOL'
-
-  if (usuarioActual=='SOL') {
-    // El usuario está autenticado, redirige a foro.html
-    window.location.href = event.target.href;
-  } else {
-    // El usuario no está autenticado, redirige al login de Cognito
-    window.location.href = 'login.html';
-  }}
-
-
-// Asociar la función al evento de clic en el enlace "FORO"
-document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
-
-*/
->>>>>>> 8091975708561585239cda45297d4ac3127f2e15

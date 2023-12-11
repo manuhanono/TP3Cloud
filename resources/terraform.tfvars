@@ -8,7 +8,7 @@ role                 = "arn:aws:iam::824206024463:role/LabRole"
 api_name             = "APIGW-G05"
 api_description      = "APIGW para la función Lambda, TP3 del G05"
 resource_path        = "myresource"
-api_stage_name       = "dev3"
+api_stage_name       = "dev"
 vpc_endpoints = {
   dynamodb = {
     service_name  = "com.amazonaws.us-east-1.dynamodb"
@@ -34,19 +34,20 @@ tables = [{
     {
       name = "Nombre"
       type = "S"
-    },
-        {
-      name = "Género"
-      type = "S"
     }
+    # ,
+    #     {
+    #   name = "Género"
+    #   type = "S"
+    # }
   ]
     global_secondary_indexes = [
     {
       name               = "GeneroIndex"
-      hash_key           = "id"
-      range_key          = "Género"
-      projection_type    = "INCLUDE"
-      non_key_attributes = ["Nombre"]
+      hash_key           = "Nombre"
+      range_key          = ""
+      projection_type    = "ALL"
+#      non_key_attributes = ["id, Género"]
     }
   ]
 }, 
@@ -70,8 +71,8 @@ tables = [{
       name               = "GeneroIndex"
       hash_key           = "id"
       range_key          = "Género"
-      projection_type    = "INCLUDE"
-      non_key_attributes = ["Nombre"]
+      projection_type    = "ALL"
+ #     non_key_attributes = ["Nombre"]
     }]
 }, 
 {
@@ -95,8 +96,8 @@ tables = [{
       name               = "GeneroIndex"
       hash_key           = "id"
       range_key          = "Género"
-      projection_type    = "INCLUDE"
-      non_key_attributes = ["Nombre"]
+      projection_type    = "ALL"
+ #     non_key_attributes = ["Nombre"]
     }]
 }
 ]
@@ -110,11 +111,39 @@ lambda_functions = [{
   source_path = "python/getMovies.py"
 },
 {
-  name        = "updateUsers"
+  name        = "updateUser"
   description = "Actualiza la base cuando se autentica un usuario"
-  handler     = "getMovies.lambda_handler"
+  handler     = "updateUser.lambda_handler"
   runtime     = "python3.8"
-  source_path = "python/getMovies.py"
+  source_path = "python/updateUser.py"
+},
+{
+  name        = "searchBar"
+  description = "Busca la data de las peliculas en DynamoDB para la barra de search"
+  handler     = "searchBar.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/searchBar.py"
+},
+{
+  name        = "getCont"
+  description = "Busca la data de las peliculas en DynamoDB"
+  handler     = "getCont.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/getCont.py"
+},
+{
+  name        = "voteFav"
+  description = "Permite votar favoritos al usuario y almacenar la informacion en DynamoDB"
+  handler     = "voteFav.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/voteFav.py"
+},
+{
+  name        = "comentFav"
+  description = "Busca la data de las peliculas en DynamoDB"
+  handler     = "comentFav.lambda_handler"
+  runtime     = "python3.8"
+  source_path = "python/comentFav.py"
 }
 ]
 

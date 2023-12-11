@@ -22,3 +22,8 @@ variable "api_stage_name" {
   description = "Nombre del stage de la API"
   type        = string
 }
+
+variable "lambda_function_name" {
+  description = "Nombre de la lambda"
+  type        = string
+}

@@ -53,9 +53,11 @@ resource "aws_cognito_user_pool_client" "userpool_client" {
       id_token = "hours"
       refresh_token = "hours"
     }
-    callback_urls = [ "https://${var.callback_url}/login.html" ]
+    callback_urls = [ "https://${var.callback_url}/foro.html" ]
       allowed_oauth_flows_user_pool_client = true
   allowed_oauth_flows                  = ["code"]
   allowed_oauth_scopes                 = ["email", "openid"]
 
 }
+
+

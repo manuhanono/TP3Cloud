@@ -5,8 +5,6 @@ console.log(id)
 
 let url = `https://api.themoviedb.org/3/movie/${id}?api_key=63cdfcbb1edb0e2c2331f8b2cb24ba9b`
 
-
-
 fetch(url)
     .then(function (response) {
         return response.json();
@@ -37,24 +35,13 @@ fetch(url)
             generos += `<p> No se encontraron generos </p>`
         }
 
-
         for (let i = 0; i < info.genres.length; i++) {
             generos +=
                 `<p><a href="./detail-genres.html?id_G_Movie=${info.genres[i].id}&name_G_Movie=${info.genres[i].name}&tipo=movies">${info.genres[i].name}.  </a></p>`
         }
         capturo.innerHTML += generos;
 
-
-
     })
     .catch(function (error) {
         console.log(error);
     })
-
-
-
-
-
-
-
-

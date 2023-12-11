@@ -21,21 +21,49 @@ resource "aws_api_gateway_integration" "example_integration" {
   resource_id             = aws_api_gateway_resource.example_resource.id
   http_method             = aws_api_gateway_method.example_method.http_method
   type                    = "AWS_PROXY"
-  integration_http_method = "GET"
-  uri                     = var.lambda_integration_uri
+  integration_http_method = "POST"
+  uri             = var.lambda_integration_uri
+
+  # request_parameters = {
+  #   "integration.request.header.Content-Type" = "'application/json'"
+  # }
+
+  # depends_on = [
+  #   aws_api_gateway_resource.example_resource,
+  #   aws_api_gateway_method.example_method,
+  # ]
 }
 
-resource "aws_api_gateway_deployment" "this" {
-  depends_on  = [aws_api_gateway_integration.example_integration]
-  rest_api_id = aws_api_gateway_rest_api.example_api.id
-  stage_name  = var.api_stage_name
+resource "aws_lambda_permission" "apigw_lambda" {
+  statement_id  = "AllowExecutionFromAPIGateway"
+  action        = "lambda:InvokeFunction"
+  function_name = var.lambda_function_name
+  principal     = "apigateway.amazonaws.com"
+  source_arn    = "arn:aws:execute-api:us-east-1:824206024463:${aws_api_gateway_rest_api.example_api.id}/*/${aws_api_gateway_method.example_method.http_method}${aws_api_gateway_resource.example_resource.path}"
+}
 
+resource "aws_api_gateway_deployment" "example" {
+  rest_api_id = aws_api_gateway_rest_api.example_api.id
+  triggers = {
+    redeployment = sha1(jsonencode(aws_api_gateway_rest_api.example_api.body))
+  }
   lifecycle {
     create_before_destroy = true
   }
+  depends_on = [aws_api_gateway_method.example_method, aws_api_gateway_integration.example_integration]
 }
+
+# resource "aws_api_gateway_deployment" "this" {
+#   depends_on  = [aws_api_gateway_integration.example_integration]
+#   rest_api_id = aws_api_gateway_rest_api.example_api.id
+#   stage_name  = var.api_stage_name
+
+#   lifecycle {
+#     create_before_destroy = true
+#   }
+# }
 resource "aws_api_gateway_stage" "this" {
-  deployment_id = aws_api_gateway_deployment.this.id
+  deployment_id = aws_api_gateway_deployment.example.id
   rest_api_id   = aws_api_gateway_rest_api.example_api.id
   stage_name    = var.api_stage_name
 }

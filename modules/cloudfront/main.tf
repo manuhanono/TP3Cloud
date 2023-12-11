@@ -26,6 +26,13 @@ resource "aws_cloudfront_distribution" "this" {
     viewer_protocol_policy = "redirect-to-https"
   }
 
+  custom_error_response {
+      error_code             = 404
+      response_code          = 404
+      response_page_path     = "/error.html" 
+      error_caching_min_ttl  = 5 
+    }
+
   restrictions {
     geo_restriction {
       restriction_type = "none"
