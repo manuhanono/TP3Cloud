@@ -24,9 +24,10 @@ resource "aws_api_gateway_integration" "example_integration" {
   integration_http_method = "POST"
   uri             = var.lambda_integration_uri
 
-  # request_parameters = {
-  #   "integration.request.header.Content-Type" = "'application/json'"
-  # }
+  
+  request_parameters = {
+    "integration.request.header.Content-Type" = "'application/json'"
+  }
 
   # depends_on = [
   #   aws_api_gateway_resource.example_resource,

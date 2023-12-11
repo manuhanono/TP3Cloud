@@ -1,52 +1,66 @@
+// URL del endpoint de tu API Gateway
+const apiGatewayUrl = 'https://1kpho6lka1.execute-api.us-east-1.amazonaws.com/dev/myresource';
+
+// Elemento HTML para el campo de búsqueda
+const buscadorInput = document.getElementById('Buscador');
+
+// Elemento HTML para mostrar el mensaje de error
+const mensajeErrorElemento = document.querySelector('.mensaje-error');
+
+// Función para realizar la búsqueda
 function realizarBusqueda() {
+    console.log('Entrando en realizarBusqueda');
+    
     // Obtiene el valor del campo de búsqueda
     const valorBuscador = buscadorInput.value;
-  
+    console.log('Valor del buscador:', valorBuscador);
+
     // Parámetros de búsqueda
     const buscador = valorBuscador;
     const media = 'movies';
-  
+
     // Construye la URL con los parámetros
     const apiUrl = `${apiGatewayUrl}?buscador=${buscador}&media=${media}`;
-  
+    console.log('URL de la API:', apiUrl);
+
     // Realiza la solicitud utilizando Fetch API
     fetch(apiUrl)
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`Error de red - ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        // Maneja los datos obtenidos de la Lambda
-        console.log('Datos de la Lambda:', data);
-  
-        // Actualiza el título con el término de búsqueda
-        const tituloResultado = document.getElementById('resultado-titulo');
-        tituloResultado.innerText = `Resultados de búsqueda: ${buscador}`;
-  
-        // Actualiza el contenido de resultados o muestra mensaje de error
-        const capturo = document.querySelector('.padre-de-peli-resultados');
-        if (data.articulosBuscados.length === 0) {
-          // Muestra un mensaje de error si no hay resultados
-          capturo.innerHTML = '<h1 class="sin-resultados">No se encontraron resultados</h1>';
-        } else {
-          // Actualiza el contenido con los resultados encontrados
-          capturo.innerHTML = data.articulosBuscados;
-        }
-      })
-      .catch(error => {
-        // Maneja los errores
-        console.error('Error en la solicitud:', error);
-  
-        // Muestra el mensaje de error en la página web
-        mensajeErrorElemento.innerText = 'Fallo la API call';
-      });
-  }
-  
-  // Agrega un evento de escucha al campo de búsqueda
-  buscadorInput.addEventListener('input', realizarBusqueda);
-  
+        .then(response => {
+            console.log('Respuesta de la API:', response);
+            if (!response.ok) {
+                throw new Error(`Error de red - ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            console.log('Datos de la Lambda:', data);
+
+            // Actualiza el título con el término de búsqueda
+            const tituloResultado = document.getElementById('resultado-titulo');
+            tituloResultado.innerText = `Resultados de búsqueda: ${buscador}`;
+
+            // Actualiza el contenido de resultados o muestra mensaje de error
+            const capturo = document.querySelector('.padre-de-peli-resultados');
+            if (!data.articulosBuscados || data.articulosBuscados.length === 0) {
+                // Muestra un mensaje de error si no hay resultados
+                capturo.innerHTML = '<h1 class="sin-resultados">No se encontraron resultados</h1>';
+            } else {
+                // Actualiza el contenido con los resultados encontrados
+                // Antes de la línea 44 en resultadobusquedapeli.js
+                console.log(data);
+                capturo.innerHTML = data.articulosBuscados;
+            }
+        })
+        .catch(error => {
+            console.error('Error en la solicitud:', error);
+
+            // Muestra el mensaje de error en la página web
+            mensajeErrorElemento.innerText = 'Fallo la API call';
+        });
+}
+
+// Agrega un evento de escucha al campo de búsqueda
+buscadorInput.addEventListener('input', realizarBusqueda);
 
 // function buscarContenido(query) {
 //     const apiUrl = 'URL_DE_TU_API_GATEWAY/search_cont'; // Reemplaza con la URL real de tu API Gateway
