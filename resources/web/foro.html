@@ -4,7 +4,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Foro - Mi Aplicación</title>
-  <link rel="stylesheet" href="estilos.css">
+  <link rel="stylesheet" href="./css/style.css">
+
 </head>
 <body>
   <!-- Contenido de la página del foro -->
@@ -16,6 +17,9 @@
     <select id="pelicula" name="pelicula" required>
     </select>
 -->
+  <label for="pelicula">Selecciona una película:</label>
+  <select id="pelicula" name="pelicula" required>
+
     <label for="comentario">Comentario (0-200 palabras):</label>
     <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
 
@@ -29,6 +33,6 @@
   <!-- Scripts -->
   <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
   <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1031.0.min.js"></script>
-  <script src="foro.js"></script>
+  <script src="./js/foro.js"></script>
 </body>
 </html>
