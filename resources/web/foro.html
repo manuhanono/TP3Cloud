@@ -1,39 +1,36 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Foro - Mi Aplicación</title>
-  <link rel="stylesheet" href="./css/style.css">
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Foro - Mi Aplicación</title>
+    <link rel="stylesheet" href="./css/style.css">
 </head>
+
 <body>
-  <!-- Contenido de la página del foro -->
+    <!-- Contenido de la página del foro -->
+    <h1>Formulario de Comentarios</h1>
 
-  <h1>Formulario de Comentarios</h1>
+    <form id="formularioComentarios">
+        <label for="pelicula">Selecciona una película:</label>
+        <select id="pelicula" name="pelicula" required></select>
 
-  <form id="formularioComentarios">
-   <!-- <label for="pelicula">Pelicula:</label>
-    <select id="pelicula" name="pelicula" required>
-    </select>
--->
-  <label for="pelicula">Selecciona una película:</label>
-  <select id="pelicula" name="pelicula" required>
+        <label for="comentario">Comentario (0-200 palabras):</label>
+        <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
 
-    <label for="comentario">Comentario (0-200 palabras):</label>
-    <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
+        <button type="button" id="enviarComentario">Enviar</button>
+    </form>
 
-    <button type="button" id="enviarComentario">Enviar</button>
-  </form>
+    <!-- Lista de comentarios -->
+    <div id="listaComentarios"></div>
 
-  <!-- Lista de comentarios -->
-  <div id="listaComentarios"></div>
-
-
-  <!-- Scripts -->
-  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-  <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1031.0.min.js"></script>
-  <script src="./js/foro.js"></script>
-  <script src="./js/autenticacion.js"></script>
+    <!-- Scripts -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://sdk.amazonaws.com/js/aws-sdk-2.1031.0.min.js"></script>
+    <script src="./js/foro.js"></script>
+    <script src="./js/autenticacion.js"></script>
+    <script src="./js/formulario.js"></script>
 </body>
+
 </html>

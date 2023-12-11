@@ -7,14 +7,18 @@ dynamodb = boto3.client('dynamodb')
 def lambda_handler(event, context):
     operation = event['operation']  # 'get' o 'post'
     table_name = 'forum'  # Reemplaza con el nombre de tu tabla en DynamoDB
-
     if operation == 'get':
         # Obtener todos los comentarios ordenados por fecha
-        try:
-            response = dynamodb.scan(
+        try:            
+            response = dynamodb.query(
                 TableName=table_name,
+                IndexName='GeneroIndex',  
                 ProjectionExpression='username, message, timestamp',
-                ExpressionAttributeNames={'#T': 'timestamp'},
+                ExpressionAttributeNames={'#C': 'canal'},
+                KeyConditionExpression='#C = :canal',
+                ExpressionAttributeValues={
+                    ':canal': {'S': 'valor_del_canal_a_buscar'}  
+                },
                 ScanIndexForward=False  # Orden descendente por fecha
             )
             comentarios = response.get('Items', [])
@@ -34,7 +38,7 @@ def lambda_handler(event, context):
                 'headers': {
                     'Content-Type': 'application/json',
                 }
-            }
+            }    
     elif operation == 'post':
         # Agregar un nuevo comentario
         try:
