@@ -15,3 +15,15 @@ resource "aws_s3_object" "data" {
 
 }
 
+resource "aws_s3_object" "data2" {
+
+  count        = length(local.objects2)
+  bucket       = module.website.bucket_id
+  key          = local.objects2[count.index].key
+  source       = local.objects2[count.index].source
+  etag         = local.objects2[count.index].etag
+  content_type = local.objects2[count.index].content_type
+
+}
+
+

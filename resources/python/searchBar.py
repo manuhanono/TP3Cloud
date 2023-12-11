@@ -5,8 +5,9 @@ def lambda_handler(event, context):
     dynamodb = boto3.client('dynamodb')
 
     # Resultado de búsqueda de película
-#    query_string_pelis = event.get('queryStringParameters', {})
-    query_pelis = event.get('buscador', '')
+    query_string_pelis = event.get('queryStringParameters', {})
+    query_pelis = query_string_pelis.get('buscador', '')
+    print(query_pelis)
     tipo = "movies"
 
     # Nombre del índice secundario global (GSI)
@@ -43,7 +44,8 @@ def lambda_handler(event, context):
             print('Error al realizar la consulta a DynamoDB con GSI:', e)
             return {
                 'statusCode': 500,
-                'body': json.dumps({'error': f'Error: {str(e)}'}),
+                'body': json.dumps({'query_pelis': query_pelis,
+                    'error': f'Error: {str(e)}'}),
                 'headers': {
                     'Content-Type': 'application/json',
                 }
