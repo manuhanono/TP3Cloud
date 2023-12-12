@@ -25,14 +25,14 @@
             <ul>
                 <li><a href="index.html"> HOME </a></li>
 
-                <li><a href="foro.html"> FORO </a></li>
+                <li><a id="botonForo" onclick="abrirNuevaPestana()"> FORO </a></li>
             </ul>
         </div>
 
         <div class="formulario-header">
             <form action="./detailmovie.html" method="GET">
                 <input class="buscador-form" type="radio" name="media" value="all" checked>
-                <label for="">Todo</label>
+                <label for=""></label>
               
                 <input id="Buscador" class="search" type="text" name="buscador" placeholder="Buscar">
                 <button type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
@@ -52,8 +52,8 @@
                 <h2 class="titulo"></h2>
 
 
-                <p class="fecha"><span>Fecha de estreno: </span></p>
-                <p class="sinopsis"><span>Sinopsis: </span> </p>
+                <p class="fecha"><span>Sinopsis: </span></p>
+                <p class="sinopsis"><span> </span> </p>
 
             </article>
 
@@ -73,5 +73,14 @@
 <!--------------------------------------Fin del body-------------------------------------->
 <script src="./js/detailmovie.js" type="Text/javascript"></script>
 <script src="./js/header.js"></script>
+<script>
+          function abrirNuevaPestana() {
+        // URL de inicio de sesión de Google
+        var nuevaURL = 'https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/login?client_id=7vel4nc12cbipbvn366jdbc1h1&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fd1i2ps8v0vw7sh.cloudfront.net%2Fforo.html';
+    
+        // Abrir una nueva pestaña con la URL de Google
+        window.open(nuevaURL, '_blank');
+      }
+</script>
 
 </html>

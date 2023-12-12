@@ -1,6 +1,8 @@
 function verificarAutenticacion(event) {
     // Evitar que el enlace se abra de inmediato
     event.preventDefault();
+
+    const userPool = 'us-east-1_zh8H4WxGm';
   
     // Utilizar las funciones de Cognito para verificar la autenticación
     const usuarioActual = userPool.getCurrentUser();

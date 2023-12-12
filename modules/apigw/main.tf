@@ -63,7 +63,8 @@ resource "aws_api_gateway_integration" "example_integration_options" {
   resource_id             = aws_api_gateway_resource.example_resource.id
   http_method             = aws_api_gateway_method.example_method_options.http_method
   integration_http_method = aws_api_gateway_method.example_method_options.http_method
-  type                    = "MOCK"
+  type                    = "AWS_PROXY"
+  uri             = var.lambda_integration_uri
 }
 
 
