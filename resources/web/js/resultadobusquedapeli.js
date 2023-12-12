@@ -48,7 +48,13 @@ function realizarBusqueda() {
                 // Actualiza el contenido con los resultados encontrados
                 // Antes de la línea 44 en resultadobusquedapeli.js
                 console.log(data);
-                capturo.innerHTML = data.articulosBuscados;
+                capturo.innerHTML = data.html.map(comentario => `
+                    <div class="resultado-pelicula">
+                        <img src="${comentario.PosterPath}" alt="Foto de la película">
+                        <h2>${comentario.Nombre}</h2>
+                        <p>Resumen: ${comentario.Sinopsis}</p>
+                    </div>
+                `).join('');
             }
         })
         .catch(error => {
