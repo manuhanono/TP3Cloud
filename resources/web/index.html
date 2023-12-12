@@ -45,7 +45,7 @@
                 <input class="buscador-form" type="radio" name="media" value="all" checked>
 
                 <input id="Buscador" class="search" type="text" name="buscador" placeholder="Buscar">
-                <button type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
+                <button id="BotonSubmit" type="submit"> <img src="./img/lupa.jpg" alt="Imagen lupa"> </button>
                 <p class="message"></p>
             </form>
         </div>
@@ -76,15 +76,21 @@
     <!-- First instance -->
     <div class="padre-peliculas-populares-home">
         <main class="main-detailmovie">
-            <section class="section-detailmovie">
+            <a onclick="rellenarBuscador(this)">
+                <section class="section-detailmovie">
 
                 <img class="imagen" src=" " alt="No se encuentra la imagen">
 
                 <article class="article-detailmovie">
                     <h2 class="titulo"></h2>
+<<<<<<< HEAD
+=======
+
+>>>>>>> b8e517a3d97886dc59996004ffab9795441cddad
                     <p class="fecha"><span>Fecha de estreno: </span></p>
                 </article>
             </section>
+        </a>
         </main>
     </div>
 
@@ -96,7 +102,7 @@
                 <img class="imagen imagen2" src=" " alt="No se encuentra la imagen">
 
                 <article class="article-detailmovie">
-                    <h2 class="titulo titulo2"></h2>
+                    <h2 class="titulo titulo2" ></h2>
                     <p class="fecha fecha2"><span>Fecha de estreno: </span></p>
                 </article>
             </section>
@@ -176,6 +182,21 @@
     </div> -->
 
     <script>
+function rellenarBuscador(element) {
+    // Obtener el campo de búsqueda
+    const buscadorInput = document.getElementById('Buscador');
+
+    // Obtener el título del elemento clickeado
+    const tituloElemento = element.querySelector('.titulo').innerText.trim();
+
+    // Rellenar el campo con el título de la película
+    buscadorInput.value = tituloElemento;
+
+    // Construir la URL con los parámetros y redirigir
+    const nuevaURL = `detailmovie.html?media=all&buscador=${encodeURIComponent(tituloElemento)}`;
+    window.location.href = nuevaURL;
+
+}
       function abrirNuevaPestana() {
         // URL de inicio de sesión de Google
         var nuevaURL = 'https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/login?client_id=7vel4nc12cbipbvn366jdbc1h1&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fd1i2ps8v0vw7sh.cloudfront.net%2Fforo.html';

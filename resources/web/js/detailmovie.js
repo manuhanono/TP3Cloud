@@ -1,18 +1,9 @@
-// URL del endpoint de tu API Gateway
-
-
 const apiGatewayUrl = 'https://1kpho6lka1.execute-api.us-east-1.amazonaws.com/dev/myresource';
 
-// Elemento HTML para el campo de búsqueda
-
-
-// Elemento HTML para mostrar el mensaje de error
 const mensajeErrorElemento = document.querySelector('.mensaje-error');
 
-// Función para realizar la búsqueda
 function realizarBusqueda() {
     console.log('Entrando en realizarBusqueda');
-    
     const queryStringPelis = location.search // capturando la query que construyó el usuario cuando buscó una palabra
     console.log('Buscaste:', queryStringPelis);
     const OLPelis = new URLSearchParams(queryStringPelis);  // a un objeto literal
