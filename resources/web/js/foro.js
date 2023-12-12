@@ -93,4 +93,76 @@ function enviarComentario() {
   
   // Llama a la función para cargar las opciones al cargar la página
   window.addEventListener('load', cargarOpcionesPeliculas);
+
+  function cargarPuntaje() {
+    // Llamada a la Lambda o cualquier otra lógica para obtener las películas
+    // Simulación de opciones de películas
+    const puntaje = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10'];
   
+    // Obtener el elemento select
+    const selectPuntaje = document.getElementById('puntaje');
+  
+    // Agregar las opciones al elemento select
+    puntaje.forEach((puntaje) => {
+        const opcion = document.createElement('option');
+        opcion.value = puntaje;
+        opcion.textContent = puntaje;
+        selectPuntaje.appendChild(opcion);
+  });
+}
+
+window.addEventListener('load', cargarPuntaje);
+
+const apiUrl2 = "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
+
+
+// Función para enviar un comentario
+function guardarComentario() {
+  // Obtener los valores de los elementos de entrada
+  const message = document.getElementById('comentario').value;
+  const channel = document.getElementById('pelicula').value;
+  const puntaje = document.getElementById('puntaje').value;
+
+  // Verificar que todos los campos estén completos
+  if (!message || !channel || !puntaje) {
+      alert('Por favor, completa todos los campos.');
+      return;
+  }
+
+  // Crear el objeto de datos
+  const data = {
+      username: "usuario_prueba",
+      message: message,
+      channel: channel,
+      Puntaje: puntaje
+  };
+
+  // Realizar la API call para guardar en DynamoDB
+  const apiUrl2 =  "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
+
+  // Realizar la solicitud utilizando Fetch API
+  fetch(apiUrl, {
+      method: 'POST',
+      headers: {
+          'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+  })
+  .then(response => {
+      if (!response.ok) {
+          throw new Error(`Error de red - ${response.status}`);
+      }
+      return response.json();
+  })
+  .then(responseData => {
+      // Manejar la respuesta si es necesario
+      console.log('Comentario guardado con éxito:', responseData);
+      // Puedes agregar lógica adicional aquí si es necesario
+  })
+  .catch(error => {
+      console.error('Error al guardar el comentario:', error);
+  });
+}
+
+// Asociar la función al evento de clic del botón
+document.getElementById('enviarComentario').addEventListener('click', guardarComentario(apiUrl2));
