@@ -38,29 +38,26 @@ def lambda_handler(event, context):
         for movie in selected_movies:
             # Verificar si el ID de la película ya está en la base de datos
             movie_id = movie.get('id')
-            response = table.get_item(Key={'movie_id': movie_id})
-            if 'Item' not in response:
-                 item = {
-                'ID': movie.get('id', ''),
+#            response = table.get_item(Key={'id': movie_id})
+#            if 'Item' not in response:
+            item = {
+                'id': str(movie.get('id', '')),
                 'Nombre': movie.get('title', ''),
                 'Sinopsis': movie.get('overview', ''),
-                'Poster Path': movie.get('poster_path', ''),
-                'Provider': movie.get('provider', ''),
+                'Poster Path': movie.get('poster_path', '')
+#                ,'Provider': movie.get('provider', ''),
             }
-                 table.put_item(Item=item)
-            else: 
-                pass
+            table.put_item(Item=item)     
+#            else: 
+#                pass
         
-        # Retorna una respuesta exitosa si la escritura en DynamoDB es exitosa
         return {
             'statusCode': 200,
             'body': json.dumps('Datos almacenados en DynamoDB exitosamente')
         }
 
     except Exception as e:
-        # Retorna un mensaje de error si hay un problema de conexión o escritura en DynamoDB
         return {
             'statusCode': 500,
             'body': json.dumps(f"Error: {str(e)}")
         }
-

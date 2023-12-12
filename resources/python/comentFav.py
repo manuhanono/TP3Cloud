@@ -3,81 +3,58 @@ import json
 from datetime import datetime
 
 dynamodb = boto3.client('dynamodb')
+table_name = 'forum' 
 
 def lambda_handler(event, context):
-    operation = event['operation']  # 'get' o 'post'
-    table_name = 'forum'  # Reemplaza con el nombre de tu tabla en DynamoDB
-    if operation == 'get':
-        # Obtener todos los comentarios ordenados por fecha
-        try:            
-            response = dynamodb.query(
-                TableName=table_name,
-                IndexName='GeneroIndex',  
-                ProjectionExpression='username, message, timestamp',
-                ExpressionAttributeNames={'#C': 'canal'},
-                KeyConditionExpression='#C = :canal',
-                ExpressionAttributeValues={
-                    ':canal': {'S': 'valor_del_canal_a_buscar'}  
-                },
-                ScanIndexForward=False  # Orden descendente por fecha
-            )
-            comentarios = response.get('Items', [])
+    try:
+        body = json.loads(event['body'])
+        
+        # Obtiene el comentario y el canal del cuerpo de la solicitud
+        username = body.get('username')
+        message = body.get('message')
+        channel = body.get('Canal')
+        puntaje = body.get('Puntaje')
 
-            return {
-                'statusCode': 200,
-                'body': json.dumps({'comentarios': comentarios}),
-                'headers': {
-                    'Content-Type': 'application/json',
-                }
-            }
-        except Exception as e:
-            print(f'Error al obtener comentarios: {e}')
-            return {
-                'statusCode': 500,
-                'body': json.dumps({'error': f'Error: {str(e)}'}),
-                'headers': {
-                    'Content-Type': 'application/json',
-                }
-            }    
-    elif operation == 'post':
-        # Agregar un nuevo comentario
-        try:
-            body = json.loads(event['body'])
-            username = body['username']
-            message = body['message']
-            timestamp = int(datetime.now().timestamp())
+        # Verifica si tanto el comentario como el canal están presentes
+        if not (username and message and channel):
+            raise ValueError('Username, message, and channel are required fields.')
 
-            # Almacena el comentario en DynamoDB
-            dynamodb.put_item(
-                TableName=table_name,
-                Item={
-                    'username': {'S': username},
-                    'timestamp': {'N': str(timestamp)},
-                    'message': {'S': message}
-                }
-            )
+        # Obtiene la marca de tiempo actual
+        timestamp = int(datetime.now().timestamp())
 
-            return {
-                'statusCode': 200,
-                'body': json.dumps({'message': 'Comentario agregado exitosamente'}),
-                'headers': {
-                    'Content-Type': 'application/json',
-                }
+        # Almacena el comentario en DynamoDB
+        dynamodb.put_item(
+            TableName=table_name,
+            Item={
+                'id': {'S': str(timestamp)},  # Puedes ajustar esto según tus necesidades
+                'username': {'S': username},
+                'timestamp': {'N': str(timestamp)},
+                'Comentario': {'S': message},
+                'Canal': {'S': channel},
+                'Puntaje': {'N': puntaje}
             }
-        except Exception as e:
-            print(f'Error al agregar comentario: {e}')
-            return {
-                'statusCode': 500,
-                'body': json.dumps({'error': f'Error: {str(e)}'}),
-                'headers': {
-                    'Content-Type': 'application/json',
-                }
-            }
-    else:
+        )
+
         return {
-            'statusCode': 400,
-            'body': json.dumps({'error': 'Operación no válida'}),
+            'statusCode': 200,
+            'body': json.dumps({'message': 'Comentario agregado exitosamente'}),
             'headers': {
-                'Content-Type': 'application/json',
-            }
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Content-Type': 'application/json'
+        }
+        }
+
+    except Exception as e:
+        print(f'Error: {e}')
+        return {
+            'statusCode': 500,
+            'body': json.dumps({'error': f'Error: {str(e)}'}),
+            'headers': {
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Content-Type': 'application/json'
+        }
         }

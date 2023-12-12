@@ -45,3 +45,38 @@ function enviarComentario() {
   // Llama a la función para cargar las opciones al cargar la página
   window.addEventListener('load', cargarOpcionesPeliculas);
   
+
+
+const apiUrl2 = "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
+
+// Datos que deseas enviar en el cuerpo de la solicitud
+const data = {
+    username: "usuario_prueba",
+    message: "Hola, este es un comentario de prueba.",
+    channel: "canal_prueba"
+    Puntaje: "aaa"
+};
+
+// Configuración de la solicitud
+const requestOptions = {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json',
+    },
+    body: JSON.stringify(data),
+};
+
+// Realiza la solicitud utilizando Fetch API
+fetch(apiUrl2, requestOptions)
+    .then(response => {
+        if (!response.ok) {
+            throw new Error(`Error en la solicitud - ${response.status}`);
+        }
+        return response.json();
+    })
+    .then(data => {
+        console.log('Respuesta del servidor:', data);
+    })
+    .catch(error => {
+        console.error('Error en la solicitud:', error);
+    });
