@@ -7,6 +7,12 @@ const buscadorInput = document.getElementById('Buscador');
 // Elemento HTML para mostrar el mensaje de error
 const mensajeErrorElemento = document.querySelector('.mensaje-error');
 
+// Elementos HTML para mostrar la información de la película
+const imagen = document.querySelector(".Poster Path");
+const nombre = document.querySelector(".Nombre");
+const fechaEstreno = document.querySelector(".fechaEstreno");
+const sinopsis = document.querySelector(".Sinopsis");
+
 // Función para realizar la búsqueda
 function realizarBusqueda() {
     console.log('Entrando en realizarBusqueda');
@@ -17,10 +23,9 @@ function realizarBusqueda() {
 
     // Parámetros de búsqueda
     const buscador = valorBuscador;
-    const media = 'movies';
 
     // Construye la URL con los parámetros
-    const apiUrl = `${apiGatewayUrl}?buscador=${buscador}&media=${media}`;
+    const apiUrl = `${apiGatewayUrl}?buscador=${buscador}}`;
     console.log('URL de la API:', apiUrl);
 
     // Realiza la solicitud utilizando Fetch API
@@ -32,38 +37,36 @@ function realizarBusqueda() {
             }
             return response.json();
         })
-        .then(data => {
+        
+        .then(function (data) {
             console.log('Datos de la Lambda:', data);
 
-            // Actualiza el título con el término de búsqueda
-            const tituloResultado = document.getElementById('resultado-titulo');
-            tituloResultado.innerText = `Resultados de búsqueda: ${buscador}`;
 
-            // Actualiza el contenido de resultados o muestra mensaje de error
-            const capturo = document.querySelector('resultados-container');
-            if (!data.articulosBuscados || data.articulosBuscados.length === 0) {
-                // Muestra un mensaje de error si no hay resultados
-                capturo.innerHTML = '<h1 class="sin-resultados">No se encontraron resultados</h1>';
+            // Verifica si hay resultados en el array "html"
+            if (data.html && data.html.length > 0) {
+                const primeraPelicula = data.html[0];
+                
+                // Establece la imagen si está disponible, de lo contrario, utiliza una imagen predeterminada
+                imagen.src = primeraPelicula["Poster Path"] ? `https://image.tmdb.org/t/p/original/${primeraPelicula["Poster Path"].S}` : "./img/noImage.png";
+                
+                // Asigna el resto de la información al DOM
+                Nombre.innerHTML = primeraPelicula["Nombre"] ? primeraPelicula["Nombre"].S : '';
+                fechaEstreno.innerHTML = primeraPelicula["FechaEstreno"] ? primeraPelicula["FechaEstreno"].S : '';
+                Sinopsis.innerHTML = primeraPelicula["Sinopsis"] ? primeraPelicula["Sinopsis"].S : '';
             } else {
-                // Actualiza el contenido con los resultados encontrados
-                // Antes de la línea 44 en resultadobusquedapeli.js
-                console.log(data);
-                capturo.innerHTML = data.articulosBuscados.map(comentario => `
-                    <div class="resultado-pelicula">
-                        <img src="${comentario.PosterPath}" alt="Foto de la película">
-                        <h2>${comentario.Nombre}</h2>
-                        <p>Resumen: ${comentario.Sinopsis}</p>
-                    </div>
-                `).join('');
+                // Muestra un mensaje si no hay resultados
+                mensajeErrorElemento.innerText = 'No hay resultados para la búsqueda.';
             }
         })
         .catch(error => {
             console.error('Error en la solicitud:', error);
-
+    
             // Muestra el mensaje de error en la página web
-            mensajeErrorElemento.innerText = 'Fallo la API call';
-        });
+            mensajeErrorElemento.innerText = 'Falló la API call';
+    });
 }
+     
+
 
 
 

@@ -13,6 +13,8 @@ def lambda_handler(event, context):
         tmdb_host = 'api.themoviedb.org'
         tmdb_path = '/3/discover/movie'
         tmdb_path2 = '/3/movie/{}/watch/providers'
+        tmdb_path3 = '/3/movie/{movie_id}/release_dates'
+
         params = f'?api_key={tmdb_api_key}'
 
         connection = http.client.HTTPSConnection(tmdb_host)
@@ -23,6 +25,10 @@ def lambda_handler(event, context):
         connection.request('GET', tmdb_path2 + params)
         tmdb_response2 = connection.getresponse()
         tmdb_data2 = json.loads(tmdb_response2.read().decode())
+
+        connection.request('GET', tmdb_path3 + params)
+        tmdb_response3 = connection.getresponse()
+        tmdb_data3 = json.loads(tmdb_response3.read().decode())
 
         # Selecciona solo dos registros de la lista de resultados
         selected_movies = tmdb_data.get('results', [])
@@ -36,6 +42,7 @@ def lambda_handler(event, context):
         for movie in selected_movies:
             movie_id = movie.get('id')
             movie['provider'] = tmdb_data2.get(movie_id, None)
+            movie['FechaEstreno'] = tmdb_data3.get(movie_id, None)
 
         # Escribe los datos extraídos en la tabla DynamoDB
         for movie in selected_movies:
@@ -46,8 +53,10 @@ def lambda_handler(event, context):
                 'id': str(movie.get('id', '')),
                 'Nombre': movie.get('title', ''),
                 'Sinopsis': movie.get('overview', ''),
+                'Fecha de estreno': movie.get('FechaEstreno',''),
+                'Poster Path': f'https://image.tmdb.org/t/p/original/{poster_path}' 
+
    #             'Poster Path': f'https://{s3_bucket_name}.s3.amazonaws.com/img/{movie_id}.jpg'
-                'Poster Path': f'https://image.tmdb.org/t/p/original/{poster_path}'
             }
             table.put_item(Item=item)     
         
