@@ -137,19 +137,22 @@ function guardarComentario() {
       Puntaje: puntaje
   };
 
+  var jsonData = JSON.stringify(data);
+
+  const requestBody = {body: jsonData};
+
   // Realizar la API call para guardar en DynamoDB
   const apiUrl2 =  "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
 
-  // Realizar la solicitud utilizando Fetch API
   fetch(apiUrl2, {
       method: 'POST',
-    //   headers: {
-    //     'Access-Control-Allow-Headers': 'Content-Type',
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
-    //     'Content-Type': 'application/json'
-    // },
-      body: JSON.stringify(data),
+      headers: {
+        'Access-Control-Allow-Headers': 'Authorization, Content-Type, enctype',
+        'Access-Control-Allow-Origin': '*',
+        'Access-Control-Allow-Methods': 'POST, PUT, GET, OPTIONS, DELETE',
+        'Content-Type': 'application/json'
+    },
+      'body': JSON.stringify(requestBody)
   })
   .then(response => {
       if (!response.ok) {
@@ -169,3 +172,5 @@ function guardarComentario() {
 
 // Asociar la función al evento de clic del botón
 document.getElementById('enviarComentario').addEventListener('click', guardarComentario);
+
+
