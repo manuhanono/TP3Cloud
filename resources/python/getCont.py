@@ -24,8 +24,11 @@ def lambda_handler(event, context):
             'statusCode': 200,
             'body': json.dumps({'peliculas': peliculas}),
             'headers': {
-                'Content-Type': 'application/json',
-            }
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Content-Type': 'application/json'
+        }
         }
 
     except Exception as e:
@@ -34,6 +37,9 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps({'error': f'Error: {str(e)}'}),
             'headers': {
-                'Content-Type': 'application/json',
-            }
+            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Origin': '*',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Content-Type': 'application/json'
+        }
         }
