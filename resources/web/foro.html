@@ -3,33 +3,71 @@
 
 <head>
     <meta charset="UTF-8">
+    <!--Utilizamos estas etiquetas a continuación para lograr una página responsive-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Foro - Mi Aplicación</title>
+
     <link rel="stylesheet" href="./css/style.css">
+
+    <title>Foro</title>
 </head>
 
 <body>
+     <!-- Comienzo encabezado -->
+
+     <header id="header">
+
+        <div class="div-lista-header">
+            <ul>
+                <li><a href="index.html"> HOME </a></li>
+
+                <li><a href="foro.html"> FORO </a></li>
+            </ul>
+        </div>
+    </header>
+    <!-- Fin encabezado-->
+
+
     <!-- Contenido de la página del foro -->
     <h1>Formulario de Comentarios</h1>
+    <br>
 
-    <form id="formularioComentarios">
-        <label for="pelicula">Selecciona una película:</label>
-        <select id="pelicula" name="pelicula" required></select>
+    <br>
+
+    <div style="text-align: center;">
+
+        <form id="formularioComentarios">
+            <label for="pelicula">Selecciona una película:</label>
+            <select id="pelicula" name="pelicula" required></select>
+            <br>
+            <br>
+
+            <label for="comentario">Comentario (0-200 palabras):</label>
+            <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
+
+            <label for="puntaje">Seleccione un puntaje:</label>
+            <select id="puntaje" name="puntaje" required></select>
+            <br>
+
+            <button type="button" id="enviarComentario">Enviar</button>
+            <button type="button" id="verComentario">Ver Comentarios</button>
+        </form>
+
+        <!-- Lista de comentarios -->
+        <h2>Comentarios Previos</h2>
+        <div id="listaComentarios"></div>
+    </div>
 
 
-        <label for="comentario">Comentario (0-200 palabras):</label>
-        <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
+    <!--------------------------------------Comienzo footer -------------------------------------->
+    <footer>
 
-        <label for="puntaje">Seleccione un puntaje:</label>
-        <select id="puntaje" name="puntaje" required></select>
+        <div class="div-logo-footer">
+            <img class="tmdb" src="./img/tmdb.png" alt="TMDB logo">
+        </div>
 
-        <button type="button" id="enviarComentario">Enviar</button>
-        <button type="button" id="verComentario">Ver Comentarios</button>
-    </form>
-
-    <!-- Lista de comentarios -->
-    <h2>Comentarios Previos</h2>
-    <div id="listaComentarios"></div>
+    </footer>
+    <!--------------------------------------Fin del footer-------------------------------------->
 
     <!-- Scripts -->
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -37,7 +75,6 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/aws-sdk/2.1031.0/aws-sdk.min.js"></script>
     <script src="./js/foro.js"></script>
     <!-- <script src="./js/autenticacion.js"></script> -->
-</body>
 
 </html>
 

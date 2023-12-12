@@ -854,6 +854,52 @@ width: 100%
 
 /* Termina CSS de Resultados de busqueda */
 
+
+/********************************************************************************************************
+*                                               CSS FORO 
+**********************************************************************************************************/
+
+/* Empieza CSS de foro.html */
+
+.main-foro {
+    padding: 10px 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    text-align: center;
+    background-color: #f7c4a2;
+}
+
+.section-foro {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;;
+    padding: 10px;
+}
+
+.section-foro h1 {
+    color: black;
+    background-color: #f7c4a2;
+    text-align: center;
+    font-size: 50px;
+}
+
+.section-foro h2 {
+    color:#96582e6c;
+    font-style: italic;
+    text-align: left;
+    font-size: 40px;
+}
+
+
+.ul-foro {
+    display: flex;
+    flex-direction: row;
+}
+
+
+/* Termina CSS de foro.html */
+
 /********************************************************************************************************
 *                                               CSS FOOTER 
 **********************************************************************************************************/
