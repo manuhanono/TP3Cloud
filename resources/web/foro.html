@@ -39,10 +39,11 @@
         <form id="formularioComentarios">
             <label for="pelicula">Selecciona una película:</label>
             <select id="pelicula" name="pelicula" required></select>
+
             <br>
             <br>
 
-            <label for="comentario">Comentario (0-200 palabras):</label>
+            <label for="comentario">Comentario (0-200 caracteres):</label>
             <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
 
             <label for="puntaje">Seleccione un puntaje:</label>
@@ -54,8 +55,12 @@
         </form>
 
         <!-- Lista de comentarios -->
+        <br>
+
         <h2>Comentarios Previos</h2>
-        <div id="listaComentarios"></div>
+        <div id="listaComentarios" class="comentarios-container"></div>
+        
+
     </div>
 
 

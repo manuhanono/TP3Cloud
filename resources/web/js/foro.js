@@ -71,7 +71,15 @@ function enviarComentario() {
       if (data || data.html || data.html.length > 0) {
         data.html.forEach(comentario => {
           const comentarioDiv = document.createElement('div');
-          comentarioDiv.textContent = `Canal: ${comentario.Canal.S}, Comentario: ${comentario.Comentario.S}, Puntaje: ${comentario.Puntaje.N}`;
+          comentarioDiv.classList.add('comentario'); // Agrega la clase "comentario"
+
+          //comentarioDiv.textContent = `Pelicula: ${comentario.Canal.S}, Comentario: ${comentario.Comentario.S}, Puntaje: ${comentario.Puntaje.N}`;
+          //comentarioDiv.textContent = `Pelicula: ${comentario.Canal.S}\nComentario: ${comentario.Comentario.S}\nPuntaje: ${comentario.Puntaje.N}`;
+          comentarioDiv.innerHTML = `
+            <p><strong></strong> ${comentario.Canal.S}</p>
+            <p><strong></strong> ${comentario.Comentario.S}</p>
+            <p><strong>Puntaje:</strong> ${comentario.Puntaje.N}</p>
+        `;
           listaComentarios.appendChild(comentarioDiv);
         });
       } else {

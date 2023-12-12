@@ -860,41 +860,109 @@ width: 100%
 **********************************************************************************************************/
 
 /* Empieza CSS de foro.html */
-
 .main-foro {
-    padding: 10px 20px;
+    padding: 20px;
     display: flex;
-    flex-direction: row;
-    justify-content: center;
+    flex-direction: column;
+    align-items: center;
     text-align: center;
     background-color: #f7c4a2;
+    border: 5px solid black;
 }
 
-.section-foro {
+#divformularioComentarios{
+    width: 80%;
+}
+#formularioComentarios {
+    width: 80%; /* Ajusta el ancho según tus necesidades */
+    max-width: 800px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #96582e6c;
+    border: 2px solid #333;
+    border-radius: 10px;
+}
+
+#formularioComentarios label {
+    font-size: 18px;
+    display: block;
+    margin-bottom: 5px;
+    text-align: center;
+    
+}
+
+#formularioComentarios select,
+#formularioComentarios textarea {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f7c4a2;
+
+}
+
+#divComentario {
+    text-align: start;
+}
+
+#enviarComentario,
+#verComentario {
+    background-color: #f7c4a2;
+    color: #333; /* Texto negro para mejor contraste */
+    padding: 10px 15px;
+    border: 1px solid #333; /* Borde negro */
+    border-radius: 5px;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+#enviarComentario:hover,
+#verComentario:hover {
+    background-color: black; /* Fondo negro al pasar el ratón */
+    color: #fff; /* Texto blanco al pasar el ratón */
+}
+
+#listaComentarios {
+    margin-top: 20px;
+    text-align: start;
+}
+
+h1, h2 {
+    color: #333;
+}
+/* Agrega estilos para centrar y dar formato a los comentarios */
+.comentarios-container {
     display: flex;
-    justify-content: center;
-    flex-direction: column;;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+.comentario {
+    border: 1px solid #ddd;
+    margin: 10px;
     padding: 10px;
+    max-width: 1000px;
+    text-align: center; 
 }
 
-.section-foro h1 {
-    color: black;
-    background-color: #f7c4a2;
-    text-align: center;
-    font-size: 50px;
+.comentario {
+    font-weight: bold;
+
 }
 
-.section-foro h2 {
-    color:#96582e6c;
-    font-style: italic;
-    text-align: left;
-    font-size: 40px;
+.pelicula {
+    font-weight: bold;
 }
 
+.puntaje {
+    font-weight: bold;
+}
 
-.ul-foro {
-    display: flex;
-    flex-direction: row;
+.pelicula, .comentario, .puntaje {
+    margin-bottom: 5px;
 }
 
 
