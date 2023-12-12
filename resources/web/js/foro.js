@@ -146,12 +146,12 @@ function guardarComentario() {
 
   fetch(apiUrl2, {
       method: 'POST',
-      headers: {
-        'Access-Control-Allow-Headers': 'Authorization, Content-Type, enctype',
-        'Access-Control-Allow-Origin': '*',
-        'Access-Control-Allow-Methods': 'POST, PUT, GET, OPTIONS, DELETE',
-        'Content-Type': 'application/json'
-    },
+    //   headers: {
+    //     'Access-Control-Allow-Headers': 'Authorization, Content-Type, enctype',
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'POST, PUT, GET, OPTIONS, DELETE',
+    //     'Content-Type': 'application/json'
+    // },
       'body': JSON.stringify(requestBody)
   })
   .then(response => {

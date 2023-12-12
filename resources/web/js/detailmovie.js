@@ -1,4 +1,4 @@
-    // URL del endpoint de tu API Gateway
+// URL del endpoint de tu API Gateway
 const apiGatewayUrl = 'https://1kpho6lka1.execute-api.us-east-1.amazonaws.com/dev/myresource';
 
 // Elemento HTML para el campo de búsqueda
