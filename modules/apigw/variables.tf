@@ -23,6 +23,11 @@ variable "api_stage_name" {
   type        = string
 }
 
+variable "method" {
+  description = "Metodo del stage de la API"
+  type        = string
+}
+
 variable "lambda_function_name" {
   description = "Nombre de la lambda"
   type        = string

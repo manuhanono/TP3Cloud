@@ -4,6 +4,7 @@ module "api_gateway_example" {
   api_description        = var.api_description
   resource_path          = var.resource_path
   api_stage_name         = var.api_stage_name
+  method = "GET"
   lambda_integration_uri = module.lambda["2"].lambda_function_invoke_arn
   lambda_function_name = module.lambda["2"].lambda_function_name
  // lambda_integration_uri = module.lambda[0].lambda_function_invoke_arn
@@ -16,6 +17,7 @@ module "api_gateway_example2" {
   api_description      = "APIGW para getComent"
   resource_path          = var.resource_path
   api_stage_name         = var.api_stage_name
+    method = "GET"
   lambda_integration_uri = module.lambda["6"].lambda_function_invoke_arn
   lambda_function_name = module.lambda["6"].lambda_function_name
  // lambda_integration_uri = module.lambda[0].lambda_function_invoke_arn
@@ -28,6 +30,8 @@ module "api_gateway_example3" {
   api_description      = "APIGW para getCont"
   resource_path          = var.resource_path
   api_stage_name         = var.api_stage_name
+    method = "GET"
+
   lambda_integration_uri = module.lambda["3"].lambda_function_invoke_arn
   lambda_function_name = module.lambda["3"].lambda_function_name
  // lambda_integration_uri = module.lambda[0].lambda_function_invoke_arn
@@ -40,6 +44,8 @@ module "api_gateway_example4" {
   api_description      = "APIGW para comentFav"
   resource_path          = var.resource_path
   api_stage_name         = var.api_stage_name
+    method = "POST"
+
   lambda_integration_uri = module.lambda["5"].lambda_function_invoke_arn
   lambda_function_name = module.lambda["5"].lambda_function_name
  // lambda_integration_uri = module.lambda[0].lambda_function_invoke_arn
