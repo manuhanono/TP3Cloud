@@ -12,7 +12,7 @@ resource "aws_api_gateway_resource" "example_resource" {
 resource "aws_api_gateway_method" "example_method" {
   rest_api_id   = aws_api_gateway_rest_api.example_api.id
   resource_id   = aws_api_gateway_resource.example_resource.id
-  http_method   = "GET"
+  http_method   = var.method
   authorization = "NONE"
 }
 
@@ -28,12 +28,45 @@ resource "aws_api_gateway_integration" "example_integration" {
   request_parameters = {
     "integration.request.header.Content-Type" = "'application/json'"
   }
-
-  # depends_on = [
-  #   aws_api_gateway_resource.example_resource,
-  #   aws_api_gateway_method.example_method,
-  # ]
 }
+
+# resource "aws_api_gateway_method" "example_method_post" {
+#   rest_api_id   = aws_api_gateway_rest_api.example_api.id
+#   resource_id   = aws_api_gateway_resource.example_resource.id
+#   http_method   = "POST"
+#   authorization = "NONE"
+# }
+
+# resource "aws_api_gateway_integration" "example_integration_post" {
+#   rest_api_id             = aws_api_gateway_rest_api.example_api.id
+#   resource_id             = aws_api_gateway_resource.example_resource.id
+#   http_method             = aws_api_gateway_method.example_method_post.http_method
+#   type                    = "AWS_PROXY"
+#   integration_http_method = "POST"
+#   uri             = var.lambda_integration_uri
+
+  
+#   request_parameters = {
+#     "integration.request.header.Content-Type" = "'application/json'"
+#   }
+# }
+
+resource "aws_api_gateway_method" "example_method_options" {
+  rest_api_id   = aws_api_gateway_rest_api.example_api.id
+  resource_id   = aws_api_gateway_resource.example_resource.id
+  http_method   = "OPTIONS"
+  authorization = "NONE"
+}
+
+resource "aws_api_gateway_integration" "example_integration_options" {
+  rest_api_id             = aws_api_gateway_rest_api.example_api.id
+  resource_id             = aws_api_gateway_resource.example_resource.id
+  http_method             = aws_api_gateway_method.example_method_options.http_method
+  integration_http_method = aws_api_gateway_method.example_method_options.http_method
+  type                    = "MOCK"
+}
+
+
 
 resource "aws_lambda_permission" "apigw_lambda" {
   statement_id  = "AllowExecutionFromAPIGateway"
