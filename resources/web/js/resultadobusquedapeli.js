@@ -41,22 +41,21 @@ function realizarBusqueda() {
         .then(function (data) {
             console.log('Datos de la Lambda:', data);
 
-
-            // Verifica si hay resultados en el array "html"
-            if (data.html && data.html.length > 0) {
-                const primeraPelicula = data.html[0];
-                
-                // Establece la imagen si está disponible, de lo contrario, utiliza una imagen predeterminada
-                imagen.src = primeraPelicula["Poster Path"] ? `https://image.tmdb.org/t/p/original/${primeraPelicula["Poster Path"].S}` : "./img/noImage.png";
-                
-                // Asigna el resto de la información al DOM
-                Nombre.innerHTML = primeraPelicula["Nombre"] ? primeraPelicula["Nombre"].S : '';
-                fechaEstreno.innerHTML = primeraPelicula["FechaEstreno"] ? primeraPelicula["FechaEstreno"].S : '';
-                Sinopsis.innerHTML = primeraPelicula["Sinopsis"] ? primeraPelicula["Sinopsis"].S : '';
-            } else {
-                // Muestra un mensaje si no hay resultados
-                mensajeErrorElemento.innerText = 'No hay resultados para la búsqueda.';
-            }
+           // Accede a los valores específicos de la respuesta JSON
+         const posterPath = data.html[0]["Poster Path"].S;
+         const titulo = data.html[0].Nombre.S;
+         const sinopsis = data.html[0].Sinopsis.S;
+ 
+         // Asigna los valores a los elementos HTML
+         let imagen = document.querySelector(".imagen");
+         let tituloElemento = document.querySelector(".titulo");
+         let sinopsisElemento = document.querySelector(".sinopsis");
+ 
+         // Asigna los valores a los elementos HTML
+         imagen.src = posterPath;
+         tituloElemento.innerHTML = titulo;
+         sinopsisElemento.innerHTML = sinopsis;
+         
         })
         .catch(error => {
             console.error('Error en la solicitud:', error);
