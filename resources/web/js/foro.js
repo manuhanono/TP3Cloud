@@ -87,7 +87,7 @@ function enviarComentario() {
   }
   
   // Asocia la función enviarComentario al evento del botón
-  document.getElementById('enviarComentario').addEventListener('click', enviarComentario);
+  document.getElementById('verComentario').addEventListener('click', enviarComentario);
  //document.getElementById('pelicula').addEventListener('change', cargarComentarios);
 
   
@@ -133,7 +133,7 @@ function guardarComentario() {
   const data = {
       username: "usuario_prueba",
       message: message,
-      channel: channel,
+      Canal: channel,
       Puntaje: puntaje
   };
 
@@ -141,11 +141,14 @@ function guardarComentario() {
   const apiUrl2 =  "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
 
   // Realizar la solicitud utilizando Fetch API
-  fetch(apiUrl, {
+  fetch(apiUrl2, {
       method: 'POST',
-      headers: {
-          'Content-Type': 'application/json',
-      },
+    //   headers: {
+    //     'Access-Control-Allow-Headers': 'Content-Type',
+    //     'Access-Control-Allow-Origin': '*',
+    //     'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+    //     'Content-Type': 'application/json'
+    // },
       body: JSON.stringify(data),
   })
   .then(response => {
@@ -165,4 +168,4 @@ function guardarComentario() {
 }
 
 // Asociar la función al evento de clic del botón
-document.getElementById('enviarComentario').addEventListener('click', guardarComentario(apiUrl2));
+document.getElementById('enviarComentario').addEventListener('click', guardarComentario);
