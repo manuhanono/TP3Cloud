@@ -35,8 +35,8 @@
             <ul>
                 <li><a href="index.html"> HOME </a></li>
 
-                <li><a id="botonForo" href="foro.html"> FORO </a></li>
-
+                <!-- <li><a id="botonForo" href="foro.html"> FORO </a></li> -->
+                <li><a id="botonForo" onclick="abrirNuevaPestana()"> FORO </a></li>
             </ul>
         </div>
 
@@ -55,13 +55,61 @@
     <!-- Fin header-->
 
     <!-- Comienzo peliculas populares-->
+    <style>
+        .movies-container {
+            display: flex;
+        }
 
-    <main class="main-home">
-        <h1>Home</h1>
-        <section class="Section1-home">
-            <h2 class="subtitulo-home">Películas populares</h2>
+        .padre-peliculas-populares-home {
+            margin-right: 20px; /* Adjust the margin as needed */
+        }
+        .imagen {
+            width: auto; /* Maintain the aspect ratio */
+            max-width: 100%; /* Ensure the image doesn't exceed its original size */
+        }
 
-            <div class="padre-peliculas-populares-home">
+        /* Add any other styles you need */
+    </style>
+<h1>Peliculas Populares</h1>
+<div class="movies-container">
+    
+    <!-- First instance -->
+    <div class="padre-peliculas-populares-home">
+        <main class="main-detailmovie">
+            <section class="section-detailmovie">
+
+                <img class="imagen" src=" " alt="No se encuentra la imagen">
+
+                <article class="article-detailmovie">
+                    <h2 class="titulo"></h2>
+
+                    <p class="rating"><span>Rating: </span> <a href="https://www.imdb.com/title/tt6468322/?ref_=fn_al_tt_1"
+                            target="_blank"></a></p>
+                    <p class="fecha"><span>Fecha de estreno: </span></p>
+                </article>
+            </section>
+        </main>
+    </div>
+
+    <!-- Second instance -->
+    <div class="padre-peliculas-populares-home">
+        <main class="main-detailmovie">
+            <section class="section-detailmovie">
+
+                <img class="imagen imagen2" src=" " alt="No se encuentra la imagen">
+
+                <article class="article-detailmovie">
+                    <h2 class="titulo titulo2"></h2>
+
+                    <p class="rating rating2"><span>Rating: </span> <a href="https://www.imdb.com/title/tt1234567/?ref_=fn_al_tt_1"
+                            target="_blank"></a></p>
+                    <p class="fecha fech2"><span>Fecha de estreno: </span></p>
+                </article>
+            </section>
+        </main>
+    </div>
+</div>
+
                 <!-- <article class="Peli-home">
                     <a href="detailmovie.html"><img class="imgpeli-home" src="./img/relatosSalvajes.jpg"
                             alt="Imagen Relatos Salvajes">
@@ -128,8 +176,10 @@
 
         <!-- Fin peliculas populares -->
 
-    <!-- Scripts -->
-    <button id="btnIniciarSesion" onclick="abrirNuevaPestana()">Iniciar Sesión para poder participar en el foro</button>
+    <!-- Scripts
+    <div class="button-container">
+        <button id="btnIniciarSesion" onclick="abrirNuevaPestana()">Iniciar Sesión para poder participar en el foro</button>
+    </div> -->
 
     <script>
       function abrirNuevaPestana() {
