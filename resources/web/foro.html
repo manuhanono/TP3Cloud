@@ -16,13 +16,18 @@
         <label for="pelicula">Selecciona una película:</label>
         <select id="pelicula" name="pelicula" required></select>
 
+
         <label for="comentario">Comentario (0-200 palabras):</label>
         <textarea id="comentario" name="comentario" rows="4" maxlength="200" required></textarea>
+
+        <label for="puntaje">Seleccione un puntaje:</label>
+        <select id="puntaje" name="puntaje" required></select>
 
         <button type="button" id="enviarComentario">Enviar</button>
     </form>
 
     <!-- Lista de comentarios -->
+    <h2>Comentarios Previos</h2>
     <div id="listaComentarios"></div>
 
     <!-- Scripts -->
@@ -34,7 +39,5 @@
 </body>
 
 </html>
-
-</script>
 
 

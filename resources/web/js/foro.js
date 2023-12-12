@@ -1,3 +1,34 @@
+// Función para cargar las opciones de películas
+function cargarOpcionesPeliculas() {
+  // Realizar la API call para obtener la lista de películas desde tu API Gateway
+  const apiUrl = 'https://6lbqfzpzp8.execute-api.us-east-1.amazonaws.com/dev/myresource';
+
+  // Realizar la solicitud utilizando Fetch API
+  fetch(apiUrl)
+    .then(response => response.json())
+    .then(data => {
+      // Obtener el elemento select
+      const selectPelicula = document.getElementById('pelicula');
+
+      // Limpiar opciones existentes
+      selectPelicula.innerHTML = '';
+
+      // Agregar las opciones al elemento select
+      data.peliculas.forEach(pelicula => {
+        const option = document.createElement('option');
+        option.value = pelicula; // Puedes ajustar esto si hay un ID único
+        option.text = pelicula;
+        selectPelicula.appendChild(option);
+      });
+    })
+    .catch(error => console.error('Error al cargar opciones de películas:', error));
+}
+
+// Llama a la función para cargar las opciones al cargar la página
+window.addEventListener('load', cargarOpcionesPeliculas);
+
+
+
 function enviarComentario() {
     const comentario = document.getElementById('comentario').value;
     const selectPelicula = document.getElementById('pelicula');
@@ -32,7 +63,23 @@ function enviarComentario() {
       })
       .then(data => {
         console.log('Datos obtenidos:', data);
-        // Aquí puedes realizar cualquier lógica adicional con los datos obtenidos
+
+           // Mostrar los comentarios 
+      const listaComentarios = document.getElementById('listaComentarios');
+      listaComentarios.innerHTML = ''; // Limpiar comentarios anteriores
+
+      if (data || data.html || data.html.length > 0) {
+        data.html.forEach(comentario => {
+          const comentarioDiv = document.createElement('div');
+          comentarioDiv.textContent = `Canal: ${comentario.Canal.S}, Comentario: ${comentario.Comentario.S}, Puntaje: ${comentario.Puntaje.N}`;
+          listaComentarios.appendChild(comentarioDiv);
+        });
+      } else {
+        const mensajeSinComentarios = document.createElement('p');
+        mensajeSinComentarios.textContent = 'No hay comentarios para esta película.';
+        listaComentarios.appendChild(mensajeSinComentarios);
+      }
+
       })
       .catch(error => {
         console.error('Error en la solicitud:', error);
@@ -41,42 +88,9 @@ function enviarComentario() {
   
   // Asocia la función enviarComentario al evento del botón
   document.getElementById('enviarComentario').addEventListener('click', enviarComentario);
+ //document.getElementById('pelicula').addEventListener('change', cargarComentarios);
+
   
   // Llama a la función para cargar las opciones al cargar la página
   window.addEventListener('load', cargarOpcionesPeliculas);
   
-
-
-const apiUrl2 = "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
-
-// Datos que deseas enviar en el cuerpo de la solicitud
-const data = {
-    username: "usuario_prueba",
-    message: "Hola, este es un comentario de prueba.",
-    channel: "canal_prueba"
-    Puntaje: "aaa"
-};
-
-// Configuración de la solicitud
-const requestOptions = {
-    method: 'POST',
-    headers: {
-        'Content-Type': 'application/json',
-    },
-    body: JSON.stringify(data),
-};
-
-// Realiza la solicitud utilizando Fetch API
-fetch(apiUrl2, requestOptions)
-    .then(response => {
-        if (!response.ok) {
-            throw new Error(`Error en la solicitud - ${response.status}`);
-        }
-        return response.json();
-    })
-    .then(data => {
-        console.log('Respuesta del servidor:', data);
-    })
-    .catch(error => {
-        console.error('Error en la solicitud:', error);
-    });
