@@ -7,6 +7,12 @@ const buscadorInput = document.getElementById('Buscador');
 // Elemento HTML para mostrar el mensaje de error
 const mensajeErrorElemento = document.querySelector('.mensaje-error');
 
+// Elementos HTML para mostrar la información de la película
+const imagen = document.querySelector(".Poster Path");
+const nombre = document.querySelector(".Nombre");
+const fechaEstreno = document.querySelector(".fechaEstreno");
+const sinopsis = document.querySelector(".Sinopsis");
+
 // Función para realizar la búsqueda
 function realizarBusqueda() {
     console.log('Entrando en realizarBusqueda');
@@ -17,10 +23,9 @@ function realizarBusqueda() {
 
     // Parámetros de búsqueda
     const buscador = valorBuscador;
-    const media = 'movies';
 
     // Construye la URL con los parámetros
-    const apiUrl = `${apiGatewayUrl}?buscador=${buscador}&media=${media}`;
+    const apiUrl = `${apiGatewayUrl}?buscador=${buscador}}`;
     console.log('URL de la API:', apiUrl);
 
     // Realiza la solicitud utilizando Fetch API
@@ -32,38 +37,35 @@ function realizarBusqueda() {
             }
             return response.json();
         })
-        .then(data => {
+        
+        .then(function (data) {
             console.log('Datos de la Lambda:', data);
 
-            // Actualiza el título con el término de búsqueda
-            const tituloResultado = document.getElementById('resultado-titulo');
-            tituloResultado.innerText = `Resultados de búsqueda: ${buscador}`;
-
-            // Actualiza el contenido de resultados o muestra mensaje de error
-            const capturo = document.querySelector('resultados-container');
-            if (!data.articulosBuscados || data.articulosBuscados.length === 0) {
-                // Muestra un mensaje de error si no hay resultados
-                capturo.innerHTML = '<h1 class="sin-resultados">No se encontraron resultados</h1>';
-            } else {
-                // Actualiza el contenido con los resultados encontrados
-                // Antes de la línea 44 en resultadobusquedapeli.js
-                console.log(data);
-                capturo.innerHTML = data.articulosBuscados.map(comentario => `
-                    <div class="resultado-pelicula">
-                        <img src="${comentario.PosterPath}" alt="Foto de la película">
-                        <h2>${comentario.Nombre}</h2>
-                        <p>Resumen: ${comentario.Sinopsis}</p>
-                    </div>
-                `).join('');
-            }
+           // Accede a los valores específicos de la respuesta JSON
+         const posterPath = data.html[0]["Poster Path"].S;
+         const titulo = data.html[0].Nombre.S;
+         const sinopsis = data.html[0].Sinopsis.S;
+ 
+         // Asigna los valores a los elementos HTML
+         let imagen = document.querySelector(".imagen");
+         let tituloElemento = document.querySelector(".titulo");
+         let sinopsisElemento = document.querySelector(".sinopsis");
+ 
+         // Asigna los valores a los elementos HTML
+         imagen.src = posterPath;
+         tituloElemento.innerHTML = titulo;
+         sinopsisElemento.innerHTML = sinopsis;
+         
         })
         .catch(error => {
             console.error('Error en la solicitud:', error);
-
+    
             // Muestra el mensaje de error en la página web
-            mensajeErrorElemento.innerText = 'Fallo la API call';
-        });
+            mensajeErrorElemento.innerText = 'Falló la API call';
+    });
 }
+     
+
 
 
 
