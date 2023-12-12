@@ -1,8 +1,10 @@
 // URL del endpoint de tu API Gateway
+
+
 const apiGatewayUrl = 'https://1kpho6lka1.execute-api.us-east-1.amazonaws.com/dev/myresource';
 
 // Elemento HTML para el campo de búsqueda
-const buscadorInput = document.getElementById('Buscador');
+
 
 // Elemento HTML para mostrar el mensaje de error
 const mensajeErrorElemento = document.querySelector('.mensaje-error');
@@ -11,12 +13,15 @@ const mensajeErrorElemento = document.querySelector('.mensaje-error');
 function realizarBusqueda() {
     console.log('Entrando en realizarBusqueda');
     
-    // Obtiene el valor del campo de búsqueda
-    const valorBuscador = buscadorInput.value;
-    console.log('Valor del buscador:', valorBuscador);
+    const queryStringPelis = location.search // capturando la query que construyó el usuario cuando buscó una palabra
+    console.log('Buscaste:', queryStringPelis);
+    const OLPelis = new URLSearchParams(queryStringPelis);  // a un objeto literal
+    console.log('Convierto a:', OLPelis);
+    const queryPelis = OLPelis.get('buscador'); // capturando el valor de la clave "buscador"
+    console.log('Me queda:', queryPelis);
 
     // Parámetros de búsqueda
-    const buscador = valorBuscador;
+    const buscador = queryPelis;
     const media = 'movies';
 
     // Construye la URL con los parámetros
@@ -53,4 +58,5 @@ function realizarBusqueda() {
     })
 }
 
-buscadorInput.addEventListener('input', realizarBusqueda);
+//buscadorInput.addEventListener('input', realizarBusqueda);
+document.addEventListener('DOMContentLoaded', realizarBusqueda());
