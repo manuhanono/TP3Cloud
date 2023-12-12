@@ -39,9 +39,9 @@ def lambda_handler(event, context):
             'statusCode': 200,
             'body': json.dumps({'message': 'Comentario agregado exitosamente'}),
             'headers': {
-            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Headers': 'Authorization, Content-Type, enctype, Origin, X-Requested-With, Accept',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET, PUT',
             'Content-Type': 'application/json'
         }
         }
@@ -52,9 +52,9 @@ def lambda_handler(event, context):
             'statusCode': 500,
             'body': json.dumps({'error': f'Error: {str(e)}'}),
             'headers': {
-            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Headers': 'Authorization, Content-Type, enctype, Origin, X-Requested-With, Accept',
             'Access-Control-Allow-Origin': '*',
-            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET',
+            'Access-Control-Allow-Methods': 'OPTIONS,POST,GET,PUT',
             'Content-Type': 'application/json'
         }
         }
