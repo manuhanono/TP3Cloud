@@ -40,7 +40,7 @@ function realizarBusqueda() {
             tituloResultado.innerText = `Resultados de búsqueda: ${buscador}`;
 
             // Actualiza el contenido de resultados o muestra mensaje de error
-            const capturo = document.querySelector('.padre-de-peli-resultados');
+            const capturo = document.querySelector('resultados-container');
             if (!data.articulosBuscados || data.articulosBuscados.length === 0) {
                 // Muestra un mensaje de error si no hay resultados
                 capturo.innerHTML = '<h1 class="sin-resultados">No se encontraron resultados</h1>';
@@ -48,7 +48,7 @@ function realizarBusqueda() {
                 // Actualiza el contenido con los resultados encontrados
                 // Antes de la línea 44 en resultadobusquedapeli.js
                 console.log(data);
-                capturo.innerHTML = data.html.map(comentario => `
+                capturo.innerHTML = data.articulosBuscados.map(comentario => `
                     <div class="resultado-pelicula">
                         <img src="${comentario.PosterPath}" alt="Foto de la película">
                         <h2>${comentario.Nombre}</h2>
@@ -65,8 +65,9 @@ function realizarBusqueda() {
         });
 }
 
-// Agrega un evento de escucha al campo de búsqueda
-buscadorInput.addEventListener('input', realizarBusqueda);
+
+
+
 
 // function buscarContenido(query) {
 //     const apiUrl = 'URL_DE_TU_API_GATEWAY/search_cont'; // Reemplaza con la URL real de tu API Gateway
