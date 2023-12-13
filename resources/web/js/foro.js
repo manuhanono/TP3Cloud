@@ -68,7 +68,7 @@ function enviarComentario() {
       const listaComentarios = document.getElementById('listaComentarios');
       listaComentarios.innerHTML = ''; // Limpiar comentarios anteriores
 
-      if (data || data.html || data.html.length > 0) {
+      if (data.html.length > 0) {
         data.html.forEach(comentario => {
           const comentarioDiv = document.createElement('div');
           comentarioDiv.classList.add('comentario'); // Agrega la clase "comentario"
@@ -76,7 +76,6 @@ function enviarComentario() {
           //comentarioDiv.textContent = `Pelicula: ${comentario.Canal.S}, Comentario: ${comentario.Comentario.S}, Puntaje: ${comentario.Puntaje.N}`;
           //comentarioDiv.textContent = `Pelicula: ${comentario.Canal.S}\nComentario: ${comentario.Comentario.S}\nPuntaje: ${comentario.Puntaje.N}`;
           comentarioDiv.innerHTML = `
-            <p><strong></strong> ${comentario.Canal.S}</p>
             <p><strong></strong> ${comentario.Comentario.S}</p>
             <p><strong>Puntaje:</strong> ${comentario.Puntaje.N}</p>
         `;
@@ -85,6 +84,12 @@ function enviarComentario() {
       } else {
         const mensajeSinComentarios = document.createElement('p');
         mensajeSinComentarios.textContent = 'No hay comentarios para esta película.';
+        const comentarioDiv = document.createElement('div');
+        comentarioDiv.innerHTML = `
+        <p><strong></strong> 'No hay comentarios para esta película.' </p>
+    `;
+
+
         listaComentarios.appendChild(mensajeSinComentarios);
       }
 
@@ -152,6 +157,11 @@ function guardarComentario() {
   // Realizar la API call para guardar en DynamoDB
   //const apiUrl2 =  "https://djiazzn75h.execute-api.us-east-1.amazonaws.com/dev/myresource";
   const apiUrl2 =  'https://djiazzn75h.execute-api.us-east-1.amazonaws.com/dev/myresource'
+
+//   const comentarioDiv = document.createElement('div');
+//   comentarioDiv.innerHTML = `
+//   <p><strong></strong> 'Cargando.....' </p>
+// `;
 
   fetch(apiUrl2, {
       method: 'POST',
