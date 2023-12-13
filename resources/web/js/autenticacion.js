@@ -28,3 +28,24 @@ function verificarAutenticacion(event) {
 }
 // Asociar la función al evento de clic en el enlace "FORO"
 document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
+
+//NUEVO AGARRANDO ID DE URL
+/*function verificarAutenticacion() {
+  const urlParams = new URLSearchParams(window.location.search);
+  const idUsuario = urlParams.get('code');
+
+  if (idUsuario) {
+      // El usuario está autenticado, permite el acceso a foro.html
+      window.location.href = 'foro.html';
+  } else {
+      // El usuario no está autenticado, redirige a la página de inicio de sesión
+      window.location.href = 'iniciar_sesion.html';
+  }
+}
+
+verificarAutenticacion(); */
+
+// autenticacion.js
+
+
+
