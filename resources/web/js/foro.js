@@ -150,16 +150,14 @@ function guardarComentario() {
   const requestBody = {body: jsonData};
 
   // Realizar la API call para guardar en DynamoDB
-  const apiUrl2 =  "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myresource";
+  //const apiUrl2 =  "https://djiazzn75h.execute-api.us-east-1.amazonaws.com/dev/myresource";
+  const apiUrl2 =  'https://djiazzn75h.execute-api.us-east-1.amazonaws.com/dev/myresource'
 
   fetch(apiUrl2, {
       method: 'POST',
-    //   headers: {
-    //     'Access-Control-Allow-Headers': 'Authorization, Content-Type, enctype',
-    //     'Access-Control-Allow-Origin': '*',
-    //     'Access-Control-Allow-Methods': 'POST, PUT, GET, OPTIONS, DELETE',
-    //     'Content-Type': 'application/json'
-    // },
+      headers: {
+        'Content-Type': 'application/json'
+    },
       'body': JSON.stringify(requestBody)
   })
   .then(response => {
@@ -169,9 +167,7 @@ function guardarComentario() {
       return response.json();
   })
   .then(responseData => {
-      // Manejar la respuesta si es necesario
       console.log('Comentario guardado con éxito:', responseData);
-      // Puedes agregar lógica adicional aquí si es necesario
   })
   .catch(error => {
       console.error('Error al guardar el comentario:', error);
