@@ -131,6 +131,7 @@ const apiUrl2 = "https://sv5jf4u1pk.execute-api.us-east-1.amazonaws.com/dev/myre
 
 // Función para enviar un comentario
 function guardarComentario() {
+
   // Obtener los valores de los elementos de entrada
   const message = document.getElementById('comentario').value;
   const channel = document.getElementById('pelicula').value;
@@ -158,10 +159,8 @@ function guardarComentario() {
   //const apiUrl2 =  "https://djiazzn75h.execute-api.us-east-1.amazonaws.com/dev/myresource";
   const apiUrl2 =  'https://djiazzn75h.execute-api.us-east-1.amazonaws.com/dev/myresource'
 
-//   const comentarioDiv = document.createElement('div');
-//   comentarioDiv.innerHTML = `
-//   <p><strong></strong> 'Cargando.....' </p>
-// `;
+  const status = document.getElementById('status');
+  status.innerHTML = 'Cargando...';
 
   fetch(apiUrl2, {
       method: 'POST',
@@ -178,13 +177,17 @@ function guardarComentario() {
   })
   .then(responseData => {
       console.log('Comentario guardado con éxito:', responseData);
+      status.innerHTML = 'Comentario cargado! Baja a ver comentarios para observar todos.';
+      enviarComentario()
+      const botonEnviar = document.getElementById('enviarComentario');
+      botonEnviar.disabled = false; 
   })
   .catch(error => {
       console.error('Error al guardar el comentario:', error);
   });
+ 
 }
+
 
 // Asociar la función al evento de clic del botón
 document.getElementById('enviarComentario').addEventListener('click', guardarComentario);
-
-

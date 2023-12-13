@@ -27,6 +27,7 @@ function realizarBusqueda() {
     .then(function (data) {
         console.log('Datos de la Lambda:', data);
         
+        if(data.html.length >= 1){
          // Accede a los valores específicos de la respuesta JSON
          const posterPath = data.html[0]["Poster Path"].S;
          const titulo = data.html[0].Nombre.S;
@@ -41,6 +42,16 @@ function realizarBusqueda() {
          imagen.src = posterPath;
          tituloElemento.innerHTML = titulo;
          sinopsisElemento.innerHTML = sinopsis;
+        }
+        if(data.html.length == 0){
+         let imagen = document.querySelector(".imagen");
+         let tituloElemento = document.querySelector(".titulo");
+         let sinopsisElemento = document.querySelector(".sinopsis");
+         imagen.src = './img/lupa.jpg';
+         tituloElemento.innerHTML = 'No se encontró ninguna pelicula';
+         sinopsisElemento.innerHTML = 'Prueba con otra';
+        }
+
 
 
     })
