@@ -37,31 +37,6 @@ function verificarAutenticacion(event) {
     window.location.href = 'https://dominioparacrearusuarios12345.auth.us-east-1.amazoncognito.com/login?client_id=7vel4nc12cbipbvn366jdbc1h1&response_type=code&scope=email+openid&redirect_uri=https%3A%2F%2Fd1i2ps8v0vw7sh.cloudfront.net%2Fforo.html';
   }
 }
-<<<<<<< HEAD
-// Asociar la función al evento de clic en el enlace "FORO"
-document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
-
-//NUEVO AGARRANDO ID DE URL
-/*function verificarAutenticacion() {
-  const urlParams = new URLSearchParams(window.location.search);
-  const idUsuario = urlParams.get('code');
-
-  if (idUsuario) {
-      // El usuario está autenticado, permite el acceso a foro.html
-      window.location.href = 'foro.html';
-  } else {
-      // El usuario no está autenticado, redirige a la página de inicio de sesión
-      window.location.href = 'iniciar_sesion.html';
-  }
-}
-
-verificarAutenticacion(); */
-
-// autenticacion.js
-
-
-
-=======
 
 // Agregar el evento de clic al botónForo
 //document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
@@ -96,4 +71,3 @@ document.addEventListener('DOMContentLoaded', verificarAutenticacion);
 // }
 // // Asociar la función al evento de clic en el enlace "FORO"
 // document.getElementById('botonForo').addEventListener('click', verificarAutenticacion);
->>>>>>> e489c2ff5bdfd7958baee3a38fa4ba5066af21bb

@@ -1,10 +1,54 @@
-function realizarBusqueda() {
+// Función para cargar las opciones de películas
+let primeraPelicula, segundaPelicula;
+
+function cargarOpcionesPeliculas() {
+    // Realizar la API call para obtener la lista de películas desde tu API Gateway
+    const apiUrl = 'https://6lbqfzpzp8.execute-api.us-east-1.amazonaws.com/dev/myresource';
+  
+    // Realizar la solicitud utilizando Fetch API
+    fetch(apiUrl)
+      .then(response => response.json())
+      .then(data => {
+        // Verificar que haya al menos dos películas en la lista
+        if (data.peliculas.length < 2) {
+          console.error('No hay suficientes películas en la lista.');
+          return;
+        }
+  
+              // Obtener índices aleatorios
+        const indicePelicula1 = Math.floor(Math.random() * data.peliculas.length);
+        let indicePelicula2;
+        do {
+            indicePelicula2 = Math.floor(Math.random() * data.peliculas.length);
+        } while (indicePelicula2 === indicePelicula1); // Asegurarse de que sean índices diferentes
+
+        // Obtener las películas correspondientes a los índices aleatorios
+        pelicula1 = data.peliculas[indicePelicula1];
+        pelicula2 = data.peliculas[indicePelicula2];
+  
+        // Guardar las películas en variables (puedes ajustar esto según tus necesidades)
+        const primeraPelicula = pelicula1;
+        const segundaPelicula = pelicula2;
+  
+        // Puedes hacer lo que quieras con las variables aquí
+        console.log('Primera Película:', primeraPelicula);
+        console.log('Segunda Película:', segundaPelicula);
+        realizarBusqueda(primeraPelicula);
+        realizarBusqueda2(segundaPelicula);
+      })
+      .catch(error => console.error('Error al cargar opciones de películas:', error));
+  }
+  
+  // Llama a la función para cargar las opciones al cargar la página
+  window.addEventListener('load', cargarOpcionesPeliculas);
+
+function realizarBusqueda(peli) {
         console.log('Entrando en realizarBusqueda');
         const apiGatewayUrl = 'https://1kpho6lka1.execute-api.us-east-1.amazonaws.com/dev/myresource';
 
         
         // Obtiene el valor del campo de búsqueda
-        const valorBuscador = 'Freelance';
+        const valorBuscador = peli;
         console.log('Valor del buscador:', valorBuscador);
     
         // Parámetros de búsqueda
@@ -46,15 +90,15 @@ function realizarBusqueda() {
 // Definir los valores constantes para buscadorInput
 
 
-document.addEventListener('DOMContentLoaded', realizarBusqueda);
+//document.addEventListener('DOMContentLoaded', realizarBusqueda);
 
-function realizarBusqueda2() {
+function realizarBusqueda2(peli) {
     console.log('Entrando en realizarBusqueda');
     const apiGatewayUrl = 'https://1kpho6lka1.execute-api.us-east-1.amazonaws.com/dev/myresource';
 
     
     // Obtiene el valor del campo de búsqueda
-    const valorBuscador = 'Reign of Chaos';
+    const valorBuscador = peli;
     console.log('Valor del buscador:', valorBuscador);
 
     // Parámetros de búsqueda
@@ -96,4 +140,7 @@ function realizarBusqueda2() {
 // Definir los valores constantes para buscadorInput
 
 
-document.addEventListener('DOMContentLoaded', realizarBusqueda2);
+//document.addEventListener('DOMContentLoaded', realizarBusqueda2);
+
+
+  
