@@ -52,11 +52,37 @@
                 <h2 class="titulo"></h2>
                 <p class="fecha"><span> </span></p>
                 <p class="sinopsis"><span> </span> </p>
+                <p class = "Provider" ><span></span></p>
 
             </article>
 
         </section>
     </main>
+    <style>
+.main-detailmovie .section-detailmovie {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Dos columnas con igual anchura */
+  grid-gap: 20px; /* Espaciado entre los contenedores (ajusta según tus necesidades) */
+}
+
+/* Ajusta el tamaño de la imagen a un ancho fijo y alto automático */
+img {
+
+height: auto;
+
+max-width: 100%;
+
+}
+
+
+
+/* Opcional: Ajusta el tamaño del contenedor según tus necesidades */
+.article-detailmovie {
+  width: 100%; /* Puedes ajustar esto según tus necesidades */
+}
+
+        
+        </style>
 
     <!--------------------------------------Comienzo footer -------------------------------------->
     <footer>
@@ -81,5 +107,6 @@
       }
 
 </script>
+
 
 </html>

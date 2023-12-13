@@ -66,7 +66,7 @@ function enviarComentario() {
 
            // Mostrar los comentarios 
       const listaComentarios = document.getElementById('listaComentarios');
-      listaComentarios.innerHTML = ''; // Limpiar comentarios anteriores
+      listaComentarios.innerHTML = ''; 
 
       if (data.html.length > 0) {
         data.html.forEach(comentario => {
@@ -81,18 +81,11 @@ function enviarComentario() {
         `;
           listaComentarios.appendChild(comentarioDiv);
         });
-      } else {
-        const mensajeSinComentarios = document.createElement('p');
-        mensajeSinComentarios.textContent = 'No hay comentarios para esta película.';
-        const comentarioDiv = document.createElement('div');
-        comentarioDiv.innerHTML = `
-        <p><strong></strong> 'No hay comentarios para esta película.' </p>
-    `;
-
-
-        listaComentarios.appendChild(mensajeSinComentarios);
       }
-
+      else{
+        const listaComentarios = document.getElementById('listaComentarios');
+        listaComentarios.innerHTML = 'No hay comentarios para esta película.';
+      } 
       })
       .catch(error => {
         console.error('Error en la solicitud:', error);
@@ -181,6 +174,10 @@ function guardarComentario() {
       enviarComentario()
       const botonEnviar = document.getElementById('enviarComentario');
       botonEnviar.disabled = false; 
+      const coment = document.getElementById('comentario');
+      coment.value = '';
+
+
   })
   .catch(error => {
       console.error('Error al guardar el comentario:', error);

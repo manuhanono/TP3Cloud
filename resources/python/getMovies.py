@@ -41,21 +41,26 @@ def lambda_handler(event, context):
 
         for movie in selected_movies:
             movie_id = movie.get('id')
-            movie['provider'] = tmdb_data2.get(movie_id, None)
-            movie['FechaEstreno'] = tmdb_data3.get(movie_id, None)
+
 
         # Escribe los datos extraídos en la tabla DynamoDB
         for movie in selected_movies:
             # Verificar si el ID de la película ya está en la base de datos
             movie_id = movie.get('id')
+            FechaEstreno = tmdb_data3.get(movie_id, None)
             poster_path = movie.get('poster_path')
+            if len(movie.get('title')) < 20:
+                provider = 'Netflix'
+            else:
+                provider = 'Star+'
             item = {
                 'id': str(movie.get('id', '')),
-                'Nombre': movie.get('title', ''),
+                'Nombre': movie.get('title', '').title(),
                 'Sinopsis': movie.get('overview', ''),
-                'Fecha de estreno': movie.get('FechaEstreno',''),
-                'Poster Path': f'https://image.tmdb.org/t/p/original/{poster_path}' 
-
+                'Fecha de estreno': FechaEstreno,
+                'Poster Path': f'https://d1i2ps8v0vw7sh.cloudfront.net/img/{movie_id}.jpeg',
+                'Provider': provider
+                    
    #             'Poster Path': f'https://{s3_bucket_name}.s3.amazonaws.com/img/{movie_id}.jpg'
             }
             table.put_item(Item=item)     

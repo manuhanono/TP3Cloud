@@ -27,21 +27,24 @@ function realizarBusqueda() {
     .then(function (data) {
         console.log('Datos de la Lambda:', data);
         
-        if(data.html.length >= 1){
+        if(data.html.length == 1){
          // Accede a los valores específicos de la respuesta JSON
          const posterPath = data.html[0]["Poster Path"].S;
          const titulo = data.html[0].Nombre.S;
          const sinopsis = data.html[0].Sinopsis.S;
+         const Provider = data.html[0].Provider.S;
  
          // Asigna los valores a los elementos HTML
          let imagen = document.querySelector(".imagen");
          let tituloElemento = document.querySelector(".titulo");
          let sinopsisElemento = document.querySelector(".sinopsis");
+         let ProviderElemento = document.querySelector(".Provider");
  
          // Asigna los valores a los elementos HTML
          imagen.src = posterPath;
          tituloElemento.innerHTML = titulo;
          sinopsisElemento.innerHTML = sinopsis;
+         ProviderElemento.innerHTML = `<br><br>Lo puedes ver en: <a href="https://www.${Provider}.com" target="">${Provider}</a>`;
         }
         if(data.html.length == 0){
          let imagen = document.querySelector(".imagen");
@@ -51,6 +54,43 @@ function realizarBusqueda() {
          tituloElemento.innerHTML = 'No se encontró ninguna pelicula';
          sinopsisElemento.innerHTML = 'Prueba con otra';
         }
+        if(data.html.length > 1){
+            const resultadosContainer = document.querySelector('.main-detailmovie .section-detailmovie');
+            resultadosContainer.innerHTML = '';
+            data.html.forEach(pelicula => {
+                // Crea un contenedor para cada película
+                let peliculaContainer = document.createElement('div');
+                peliculaContainer.classList.add('pelicula-container');
+        
+                // Accede a los valores específicos de la respuesta JSON
+                const posterPath = pelicula['Poster Path'].S;
+                const titulo = pelicula.Nombre.S;
+                const sinopsis = pelicula.Sinopsis.S;
+                const Provider = pelicula.Provider.S;
+        
+                // Crea elementos HTML para la película
+                let imagen = document.createElement('img');
+                imagen.src = posterPath;
+        
+                let tituloElemento = document.createElement('h2');
+                tituloElemento.textContent = titulo;
+        
+                let sinopsisElemento = document.createElement('p');
+                sinopsisElemento.textContent = sinopsis;
+
+                let ProviderElemento = document.createElement('p');
+                ProviderElemento.textContent = Provider;
+        
+                // Agrega los elementos al contenedor de la película
+                peliculaContainer.appendChild(imagen);
+                peliculaContainer.appendChild(tituloElemento);
+                peliculaContainer.appendChild(sinopsisElemento);
+                peliculaContainer.appendChild(ProviderElemento);
+
+        
+                // Agrega el contenedor de la película al contenedor principal
+                resultadosContainer.appendChild(peliculaContainer);
+            });}
 
 
 
